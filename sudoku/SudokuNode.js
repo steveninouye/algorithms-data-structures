@@ -7,32 +7,21 @@ class SudokuNode {
     this.puzzle = puzzle;
   }
 
-  remove(val) {
-    if(val){
+  remove() {
+    const rowValues = this.puzzle.rowValues[this.row];
+    const colValues = this.puzzle.colValues[this.col];
+    const quadValues = this.puzzle.quadValues[this.quad];
+    const allValues = rowValues.concat(colValues).concat(quadValues);
+    for (let val of allValues) {
       let valueIdx = this.possibilities.indexOf(val);
-      return valueIdx === -1 ? false : this.possibilities.splice(valueIdx, 1);
-    } else {
-      const rowValues = this.puzzle.rowValues[this.row];
-      const colValues = this.puzzle.colValues[this.col];
-      const quadValues = this.puzzle.quadValues[this.quad];
-      const allValues = rowValues.concat(colValues).concat(quadValues);
-      for (let value of allValues){
-        let valueIdx = this.possibilities.indexOf(val);
-        if(valueIdx === -1){
-          return false;
-        } else {
-          this.possibilities.splice(valueIdx, 1);
-        }
+      if (valueIdx !== -1) {
+        this.possibilities.splice(valueIdx, 1);
       }
     }
   }
 
   numPoss() {
-    return this.possibilities.length; // how many possible choices does a node have as it's value
-  }
-
-  isSolved() {
-    return !!this.val; // this will work because all values are 1 - 9
+    return this.possibilities.length;
   }
 }
 

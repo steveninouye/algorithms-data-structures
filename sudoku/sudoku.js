@@ -10,13 +10,14 @@ let sudokuPuzzle = [
   [null, 6, null, null, null, null, 2, 8, null],
   [null, null, null, 4, 1, 9, null, null, 5],
   [null, null, null, null, 8, null, null, 7, 9]
-]
+];
 
-let solvedPuzzle = sudokuSolver(sudokuPuzzle)
+let solvedPuzzle = sudokuSolver(sudokuPuzzle);
+console.log(solvedPuzzle);
 
 // testing
 function checkCorrect(puzzle) {
-  let testResult = true
+  let testResult = true;
   let numHash = {
     1: [],
     2: [],
@@ -27,35 +28,34 @@ function checkCorrect(puzzle) {
     7: [],
     8: [],
     9: []
-  }
+  };
   solvedPuzzle.reduce((hash, row, index) => {
     let rowResults = row.reduce((rowHash, num, i) => {
       if (num == null) {
-        console.log('row: ' + row)
-        console.log('index: ' + i)
-        testResult = false
+        console.log('row: ' + row);
+        console.log('index: ' + i);
+        testResult = false;
       } else if (num in rowHash) {
-        console.log('row: ' + row)
-        console.log('index: ' + i)
-        testResult = false
+        console.log('row: ' + row);
+        console.log('index: ' + i);
+        testResult = false;
       } else {
-        rowHash[num] = index
+        rowHash[num] = index;
       }
-      return rowHash
-    }, {})
+      return rowHash;
+    }, {});
 
     for (var i = 1; i < 10; i++) {
-      let col = rowResults[i]
+      let col = rowResults[i];
       if (hash[i].includes(col)) {
-        testResult = false
+        testResult = false;
       } else {
-        hash[i].push(col)
+        hash[i].push(col);
       }
     }
-    return hash
-  }, numHash)
-  return testResult
+    return hash;
+  }, numHash);
+  return testResult;
 }
 
-
-console.log(checkCorrect(solvedPuzzle))
+console.log(checkCorrect(solvedPuzzle));
