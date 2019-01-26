@@ -1,4 +1,4 @@
-const SudokuNode = require('./sudokuNode.js');
+const sudokuSolver = require('./sudokuSolver.js');
 
 let sudokuPuzzle = [
   [5, 3, null, null, 7, null, null, null, null],
@@ -11,11 +11,6 @@ let sudokuPuzzle = [
   [null, null, null, 4, 1, 9, null, null, 5],
   [null, null, null, null, 8, null, null, 7, 9]
 ]
-
-function sudokuSolver(puzzle) {
-
-  return puzzle
-}
 
 let solvedPuzzle = sudokuSolver(sudokuPuzzle)
 
