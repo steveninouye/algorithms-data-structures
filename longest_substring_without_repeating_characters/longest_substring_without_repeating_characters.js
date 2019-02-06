@@ -32,6 +32,7 @@ const lengthOfLongestSubstring = (str) => {
       while (str[slowPointer] !== str[i]) {
         store.delete(str[slowPointer]);
         slowPointer++;
+        counter++;
       }
       slowPointer++;
     } else {
@@ -40,7 +41,6 @@ const lengthOfLongestSubstring = (str) => {
   }
   let lastIdx = str.length - 1;
   let lastLtr = str[lastIdx];
-  console.log('store: ', store);
   if (store.has(lastLtr)) {
     let difference = lastIdx - slowPointer;
     return difference > result ? difference : result;
@@ -53,4 +53,8 @@ const lengthOfLongestSubstring = (str) => {
 // console.log(lengthOfLongestSubstring('abcabcbb') === 3);
 // console.log(lengthOfLongestSubstring('bbbbb') === 1);
 // console.log(lengthOfLongestSubstring('pwwkew') === 3);
-console.log(lengthOfLongestSubstring('nfpdmpi'));
+console.log(
+  lengthOfLongestSubstring(
+    'nfpdmpigargsgasgaergrbrsdhrsdggarouigboiugbaiobaokbgag'
+  )
+);
