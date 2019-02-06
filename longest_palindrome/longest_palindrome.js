@@ -13,7 +13,32 @@ Input: "cbbd"
 Output: "bb"
 */
 
-var longestPalindrome = function(s) {};
+var longestPalindrome = function(str) {
+  if (str.length === 0) return '';
+  let start = 0,
+    numChars = str.length;
+  while (numChars > 1) {
+    let shift = 0;
+    while (start + shift + numChars <= str.length) {
+      let partition = str.slice(start + shift, numChars + shift);
+      if (isPalindrome(partition)) {
+        return partition;
+      }
+      shift++;
+    }
+    numChars--;
+  }
+  return str[0];
+};
+
+const isPalindrome = (str) => {
+  for (let i = 0; i < str.length / 2; i++) {
+    if (str[i] !== str[str.length - 1 - i]) {
+      return false;
+    }
+  }
+  return true;
+};
 
 console.log(longestPalindrome('babad') === 'bab');
 console.log(longestPalindrome('cbbd') === 'bb');
