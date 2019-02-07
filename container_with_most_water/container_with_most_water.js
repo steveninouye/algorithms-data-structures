@@ -14,5 +14,17 @@ Output: 49
 */
 
 var maxArea = function(arr) {
-  
+  let left = 0;
+  let right = arr.length - 1;
+  let result = 0;
+  while (left < right) {
+    let area = (right - left) * Math.min(arr[left], arr[right]);
+    result = Math.max(result, area);
+    if (arr[left] < arr[right]) {
+      left++;
+    } else {
+      right--;
+    }
+  }
+  return result;
 };
