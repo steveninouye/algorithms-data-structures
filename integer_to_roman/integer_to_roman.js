@@ -45,7 +45,11 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 
 const intToRoman = (num) => {
   // create a result string
-  // remove the ones digit
+  let result = "";
+  while(num > 0){
+    // remove the ones digit
+    
+  }
   // key into object to get coresponding symbol
   // attach corresponding symbol to the left of the result string
   // divide num by 10 and remove any trailing numbers after decimal
