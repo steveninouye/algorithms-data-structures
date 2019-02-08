@@ -44,14 +44,29 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 */
 
 const intToRoman = (num) => {
+  const map = {
+    1: 'I',
+    4: 'IV',
+    5: 'V',
+    9: 'IX',
+    10: 'X',
+    40: 'XL',
+    50: 'L',
+    90: 'XC',
+    100: 'C',
+    400: 'CD',
+    500: 'D',
+    900: 'CM',
+    1000: 'M'
+  };
   // create a result string
-  let result = "";
-  while(num > 0){
+  let result = '';
+  while (num > 0) {
     // remove the ones digit
-    
+    let n = num % 10;
   }
   // key into object to get coresponding symbol
   // attach corresponding symbol to the left of the result string
   // divide num by 10 and remove any trailing numbers after decimal
   // return result string
-}
+};
