@@ -37,5 +37,12 @@ for (int i = 0; i < len; i++) {
 */
 
 const removeDuplicates = (nums) => {
-  
-}
+  let swappingIdx = 1;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] !== nums[i - 1]) {
+      nums[swappingIdx] = nums[i];
+      swappingIdx++;
+    }
+  }
+  return swappingIdx;
+};
