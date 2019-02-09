@@ -26,14 +26,16 @@ const letterCombinations = (digits) => {
     '8': ['t', 'u', 'v'],
     '9': ['w', 'x', 'y', 'z']
   };
-  if (digits.length === 1) return map[digits];
-  const result = [];
-  let el = digits[0];
-  let prev = letterCombinations(digits.slice(1));
-  for (let str of prev) {
-    for (let ltr of map[el]) {
-      result.push(ltr + str);
-    }
+  let combinations = [''];
+  let len = digits.length;
+  for (let i = 0; i < len; i++) {
+    let newCombinations = [];
+    map[digits[i]].forEach((e) => {
+      combinations.forEach((f) => {
+        newCombinations.push(f + e);
+      });
+    });
+    combinations = newCombinations;
   }
-  return result;
+  return combinations;
 };
