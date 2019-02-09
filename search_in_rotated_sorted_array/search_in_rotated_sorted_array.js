@@ -21,4 +21,39 @@ Input: nums = [4,5,6,7,0,1,2], target = 3
 Output: -1
 */
 
-const search = (nums, target) => {};
+const search = (nums, target) => {
+  let len = nums.length;
+  // base case is if nums.length <= 1 and does not equal target
+  if (len === 0 || (len === 1 && nums[0] !== target)) return -1;
+  // find middle element
+  let midIdx = ((len - 1) / 2) | 0;
+  let midEl = nums[midIdx];
+  // if middle element matches target return element index
+  if (midEl === target) return midIdx;
+  // find value of element at index 0
+  let firstEl = nums[0];
+  if (firstEl === target) return 0;
+  // if value of element at index of 0 is less than target and middle element is greater than target
+  // check left half
+  // if value of element at index 0 is greater than target and middle element is greater than target
+  // check left half
+  if (
+    (firstEl < target && midEl > target) ||
+    (firstEl > target && midEl > target)
+  ) {
+    return search(nums.slice(0, midIdx), target);
+  } else {
+    //  if value of element at index 0 is less than target and middle elemetn is less than target
+    // check right half
+    // if value of element at index 0 is greater than target and middle element is less than target
+    // check right half
+    let result = search(nums.slice(midIdx + 1), target);
+    if (result === -1) {
+      return -1;
+    } else {
+      return midIdx + 1 + result;
+    }
+  }
+};
+
+console.log(search([4, 5, 6, 7, 0, 1, 2], 0));
