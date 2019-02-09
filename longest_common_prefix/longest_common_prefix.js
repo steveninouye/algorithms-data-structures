@@ -18,3 +18,18 @@ Note:
 
 All given inputs are in lowercase letters a-z.
 */
+
+const longestCommonPrefix = (strs) => {
+  if (strs.length === 0) return '';
+  let len = strs[0].length;
+  let result = '';
+  for (let i = 0; i < len; i++) {
+    let ltr = strs[0][i];
+    let equal = true;
+    for (let j = 1; j < strs.length; j++) {
+      if (strs[j][i] !== ltr) return result;
+    }
+    if (equal) result += ltr;
+  }
+  return strs[0];
+};
