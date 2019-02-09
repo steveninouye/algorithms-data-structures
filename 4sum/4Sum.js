@@ -18,4 +18,43 @@ A solution set is:
 ]
 */
 
-const fourSum = (nums, target) => {};
+const fourSum = (nums, target) => {
+  if (nums.length < 4) return [];
+  nums.sort((a, b) => a - b);
+  let result = [];
+  for (let i = 0; i < nums.length - 3; i++) {
+    let num = nums[i];
+    if (i !== 0 && num === nums[i - 1]) continue;
+    for (let j = i + 1; j < nums.length - 2; j++) {
+      if (j !== i + 1 && nums[j] === nums[j - 1]) continue;
+      let targ = num + nums[j];
+      let lo = j + 1;
+      let hi = nums.length - 1;
+      while (lo < hi) {
+        let sum = targ + nums[lo] + nums[hi];
+        if (sum === target) {
+          result.push([nums[i], nums[j], nums[lo], nums[hi]]);
+          lo++;
+          while (nums[lo] === nums[lo - 1]) {
+            lo++;
+          }
+          hi--;
+          while (nums[hi] === nums[hi + 1]) {
+            hi--;
+          }
+        } else if (sum < target) {
+          lo++;
+          while (nums[lo] === nums[lo - 1]) {
+            lo++;
+          }
+        } else {
+          hi--;
+          while (nums[hi] === nums[hi + 1]) {
+            hi--;
+          }
+        }
+      }
+    }
+  }
+  return result;
+};
