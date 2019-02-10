@@ -1,5 +1,5 @@
-require_relative 'p05_hash_map'
-require_relative 'p04_linked_list'
+require_relative "p05_hash_map"
+require_relative "p04_linked_list"
 
 class LRUCache
   def initialize(max, prc)
@@ -14,20 +14,29 @@ class LRUCache
   end
 
   def get(key)
+
+    # add if desn't exist
+    # if exist move to tail of head
+    # 
   end
 
   def to_s
-    'Map: ' + @map.to_s + '\n' + 'Store: ' + @store.to_s
+    "Map: " + @map.to_s + '\n' + "Store: " + @store.to_s
   end
 
   private
 
   def calc!(key)
     # suggested helper method; insert an (un-cached) key
+    val = @prc.call(key)
+    node = @store.append(key, val)
+    @map.set(key,node)
   end
 
   def update_node!(node)
     # suggested helper method; move a node to the end of the list
+    node.remove
+    @store.append()
   end
 
   def eject!
