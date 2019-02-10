@@ -61,7 +61,7 @@ const searchRange = (nums, target, side = null /* R or L */) => {
 console.log(searchRange([5, 7, 7, 8, 8, 10], 8));
 console.log(
   searchRange([5, 7, 7, 8, 8, 10], 8)[0] === 3 &&
-    searchRange([5, 7, 7, 8, 8, 10], 8)[4] === 4
+    searchRange([5, 7, 7, 8, 8, 10], 8)[1] === 4
 );
 console.log(searchRange([5, 7, 7, 8, 8, 10], 6));
 console.log(
