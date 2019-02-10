@@ -17,46 +17,41 @@ Output: [-1,-1]
 */
 
 const searchRange = (nums, target) => {
-  let rightEnd;
-  let left = (() => {
-    let start = 0;
-    let end = nums.length - 1;
-    rightEnd = end;
-    let result;
-    while (end - start >= 0) {
-      let midIdx = start + Math.floor((end - start) / 2);
-      let midEl = nums[midIdx];
-      if (midEl === target) {
-        result = midIdx;
-        end = midIdx - 1;
-      } else if (midEl < target) {
-        start = midIdx + 1;
-      } else {
-        end = midIdx - 1;
-        rightEnd = end;
+  let start = 0;
+  let end = nums.length - 1;
+  let rightEnd = end;
+  let rightStart;
+  let left;
+  while (end - start >= 0) {
+    let midIdx = start + Math.floor((end - start) / 2);
+    let midEl = nums[midIdx];
+    if (midEl === target) {
+      left = midIdx;
+      end = midIdx - 1;
+      if (rightStart === undefined) {
+        rightStart = midIdx;
       }
+    } else if (midEl < target) {
+      start = midIdx + 1;
+    } else {
+      end = midIdx - 1;
+      rightEnd = end;
     }
-    return result;
-  })();
+  }
   if (left === undefined) return [-1, -1];
-  let right = (() => {
-    let start = left;
-    let end = rightEnd;
-    let result;
-    while (end - start >= 0) {
-      let midIdx = start + Math.floor((end - start) / 2);
-      let midEl = nums[midIdx];
-      if (midEl === target) {
-        result = midIdx;
-        start = midIdx + 1;
-      } else if (midEl < target) {
-        start = midIdx + 1;
-      } else {
-        end = midIdx - 1;
-      }
+  let right;
+  while (rightEnd >= rightStart) {
+    let midIdx = rightStart + Math.floor((rightEnd - rightStart) / 2);
+    let midEl = nums[midIdx];
+    if (midEl === target) {
+      right = midIdx;
+      rightStart = midIdx + 1;
+    } else if (midEl < target) {
+      rightStart = midIdx + 1;
+    } else {
+      rightEnd = midIdx - 1;
     }
-    return result;
-  })();
+  }
   return [left, right];
 };
 
