@@ -50,7 +50,92 @@ The given board contain only digits 1-9 and the character '.'.
 The given board size is always 9x9.
 */
 
-const isValidSudoku = (board) => {};
+/* APPROACH
+// create object with keys of row, col, and grid
+/////// keys of each key will be numbers (as string)
+/////////// each key will hold an array of seen values as a set
+// iterate over array
+// each element find row, col, and grid number
+// see if value is already in set to corresponding row, col, and grid numbers
+//// if value exist return false
+// if all cells are examined return true */
+const isValidSudoku = (board) => {
+  let row = {
+    0: new Set(),
+    1: new Set(),
+    2: new Set(),
+    3: new Set(),
+    4: new Set(),
+    5: new Set(),
+    6: new Set(),
+    7: new Set(),
+    8: new Set()
+  };
+  let col = {
+    0: new Set(),
+    1: new Set(),
+    2: new Set(),
+    3: new Set(),
+    4: new Set(),
+    5: new Set(),
+    6: new Set(),
+    7: new Set(),
+    8: new Set()
+  };
+  let grid = {
+    0: new Set(),
+    1: new Set(),
+    2: new Set(),
+    3: new Set(),
+    4: new Set(),
+    5: new Set(),
+    6: new Set(),
+    7: new Set(),
+    8: new Set()
+  };
+  for (let rowNum = 0; rowNum < board.length; rowNum++) {
+    for (let colNum = 0; colNum < board[rowNum].length; colNum++) {
+      let value = board[rowNum][colNum];
+      if (value === '.') continue;
+      if (row[rowNum].has(value) || col[colNum].has(value))
+        return false;
+      let gridNum = getGrid(rowNum, colNum);
+      if (grid[gridNum].has(value)) return false;
+      row[rowNum].add(value);
+      col[colNum].add(value);
+      grid[gridNum].add(value);
+    }
+  }
+  return true;
+};
+
+const getGrid = (row, col) => {
+  if (row < 3) {
+    if (col < 3) {
+      return 0;
+    } else if (col < 6) {
+      return 1;
+    } else {
+      return 2;
+    }
+  } else if (row < 6) {
+    if (col < 3) {
+      return 3;
+    } else if (col < 6) {
+      return 4;
+    } else {
+      return 5;
+    }
+  } else {
+    if (col < 3) {
+      return 6;
+    } else if (col < 6) {
+      return 7;
+    } else {
+      return 8;
+    }
+  }
+};
 
 console.log(
   'output=> ',
