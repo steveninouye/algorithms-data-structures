@@ -17,9 +17,11 @@ Output: [-1,-1]
 */
 
 const searchRange = (nums, target) => {
+  let rightEnd;
   let left = (() => {
     let start = 0;
     let end = nums.length - 1;
+    rightEnd = end;
     let result;
     while (end - start >= 0) {
       let midIdx = start + Math.floor((end - start) / 2);
@@ -31,6 +33,7 @@ const searchRange = (nums, target) => {
         start = midIdx + 1;
       } else {
         end = midIdx - 1;
+        rightEnd = end;
       }
     }
     return result;
@@ -38,7 +41,7 @@ const searchRange = (nums, target) => {
   if (left === undefined) return [-1, -1];
   let right = (() => {
     let start = left;
-    let end = nums.length - 1;
+    let end = rightEnd;
     let result;
     while (end - start >= 0) {
       let midIdx = start + Math.floor((end - start) / 2);
