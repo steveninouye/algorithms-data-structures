@@ -42,7 +42,22 @@ rotate the input matrix in-place such that it becomes:
 ]
 */
 
-const rotate = (matrix) => {};
+const rotate = (matrix) => {
+  let numRows = matrix.length;
+  for (let rowNum = 0; rowNum < numRows - 1; rowNum++) {
+    for (let colNum = 0; colNum < numRows - 1; colNum++) {
+      let topLeft = matrix[rowNum][colNum];
+      let topRight = matrix[colNum][numRows - 1 - rowNum];
+      let bottomRight = matrix[numRows - 1 - rowNum][numRows - 1 - colNum];
+      let bottomLeft = matrix[rowNum - 1 - colNum][rowNum];
+      matrix[rowNum][colNum] = bottomLeft;
+      matrix[colNum][numRows - 1 - rowNum] = topLeft;
+      matrix[numRows - 1 - rowNum][numRows - 1 - colNum] = topRight;
+      matrix[rowNum - 1 - colNum][rowNum] = bottomRight;
+    }
+  }
+  return matrix;
+};
 
 console.log(
   'output=>',
