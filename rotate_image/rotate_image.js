@@ -43,17 +43,18 @@ rotate the input matrix in-place such that it becomes:
 */
 
 const rotate = (matrix) => {
-  let numRows = matrix.length;
-  for (let rowNum = 0; rowNum < numRows - 1; rowNum++) {
-    for (let colNum = 0; colNum < numRows - 1; colNum++) {
+  let len = matrix.length - 1;
+  
+  for (let rowNum = 0; rowNum < Math.floor(matrix.length / 2); rowNum++) {
+    for (let colNum = rowNum; colNum < len - rowNum; colNum++) {
       let topLeft = matrix[rowNum][colNum];
-      let topRight = matrix[colNum][numRows - 1 - rowNum];
-      let bottomRight = matrix[numRows - 1 - rowNum][numRows - 1 - colNum];
-      let bottomLeft = matrix[rowNum - 1 - colNum][rowNum];
+      let topRight = matrix[colNum][len - rowNum];
+      let bottomRight = matrix[len - rowNum][len - colNum];
+      let bottomLeft = matrix[len - colNum][rowNum];
       matrix[rowNum][colNum] = bottomLeft;
-      matrix[colNum][numRows - 1 - rowNum] = topLeft;
-      matrix[numRows - 1 - rowNum][numRows - 1 - colNum] = topRight;
-      matrix[rowNum - 1 - colNum][rowNum] = bottomRight;
+      matrix[colNum][len - rowNum] = topLeft;
+      matrix[len - rowNum][len - colNum] = topRight;
+      matrix[len - colNum][rowNum] = bottomRight;
     }
   }
   return matrix;
@@ -67,16 +68,18 @@ console.log(
 let result = [[15, 13, 2, 5], [14, 3, 4, 1], [12, 6, 8, 9], [16, 7, 10, 11]];
 
 console.log(
-  rotate(
-    [[5, 1, 9, 11], [2, 4, 8, 10], [13, 3, 6, 7], [15, 14, 12, 16]].reduce(
-      (acc, row, i) => {
-        let ansRow = result[i];
-        for (let j = 0; j < row.length; j++) {
-          if (row[j] !== ansRow[j]) acc = false;
-        }
-        return acc;
-      },
-      true
-    )
-  )
+  rotate([
+    [5, 1, 9, 11],
+    [2, 4, 8, 10],
+    [13, 3, 6, 7],
+    [15, 14, 12, 16]
+  ]).reduce((acc, row, i, arr) => {
+    let ansRow = result[i];
+    for (let j = 0; j < row.length; j++) {
+      if (row[j] !== ansRow[j]) {
+        acc = false;
+      }
+    }
+    return acc;
+  }, true)
 );
