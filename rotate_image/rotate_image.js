@@ -44,8 +44,8 @@ rotate the input matrix in-place such that it becomes:
 
 const rotate = (matrix) => {
   let len = matrix.length - 1;
-  
-  for (let rowNum = 0; rowNum < Math.floor(matrix.length / 2); rowNum++) {
+  let maxRow = (matrix.length / 2) | 0;
+  for (let rowNum = 0; rowNum < maxRow; rowNum++) {
     for (let colNum = rowNum; colNum < len - rowNum; colNum++) {
       let topLeft = matrix[rowNum][colNum];
       let topRight = matrix[colNum][len - rowNum];
