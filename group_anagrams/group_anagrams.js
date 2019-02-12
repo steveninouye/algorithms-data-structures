@@ -28,13 +28,16 @@ const groupAnagrams = (strs) => {
     let str = strs[i];
     let word = new Word(strs[i]);
     let len = words.length;
+    let isAnagram = false;
     for (let j = 0; j < len; j++) {
       if (words[j].isAnagram(word)) {
+        isAnagram = true;
         result[words[j].word].push(str);
-      } else {
-        words.push(word);
-        result[str] = [str];
       }
+    }
+    if (!isAnagram) {
+      words.push(word);
+      result[str] = [str];
     }
   }
   return Object.values(result);
@@ -63,7 +66,6 @@ class Word {
     let keys2 = Object.keys(this.letters);
     if (keys1.length !== keys2.length) return false;
     for (let key of keys1) {
-      console.log(key);
       if (this.letters[key] !== word.letters[key]) return false;
     }
     return true;
