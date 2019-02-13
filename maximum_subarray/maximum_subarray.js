@@ -13,3 +13,5 @@ If you have figured out the O(n) solution, try coding another solution using the
 */
 
 const maxSubArray = (nums) => {};
+
+export default maxSubArray;
