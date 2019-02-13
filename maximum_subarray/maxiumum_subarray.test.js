@@ -7,3 +7,7 @@ test('runs', () => {
 test('runs', () => {
   expect(maxSubArray([-1])).toBe(-1);
 });
+
+test('runs', () => {
+  expect(maxSubArray([-2, 1])).toBe(1);
+});
