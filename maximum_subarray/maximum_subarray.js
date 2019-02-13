@@ -12,6 +12,8 @@ Follow up:
 If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
 */
 
-const maxSubArray = (nums) => {};
+const maxSubArray = (nums) => {
+  return nums;
+};
 
-export default maxSubArray;
+module.exports = maxSubArray;
