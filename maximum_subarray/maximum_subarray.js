@@ -13,7 +13,7 @@ If you have figured out the O(n) solution, try coding another solution using the
 */
 
 const maxSubArray = (nums) => {
-  let max = -Infinity;
+  let max = nums[0];
   let total = 0;
   for (let i = 0; i < nums.length; i++) {
     total += nums[i];
