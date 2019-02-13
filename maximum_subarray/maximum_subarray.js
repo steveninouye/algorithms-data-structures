@@ -13,7 +13,17 @@ If you have figured out the O(n) solution, try coding another solution using the
 */
 
 const maxSubArray = (nums) => {
-  return nums;
+  let max = nums[0];
+  let total = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    total += nums[i];
+    if (total < 0) {
+      total = 0;
+      continue;
+    }
+    if (total > max) max = total;
+  }
+  return max;
 };
 
 module.exports = maxSubArray;
