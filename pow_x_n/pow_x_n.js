@@ -21,13 +21,20 @@ Note:
 n is a 32-bit signed integer, within the range [−231, 231 − 1]
 */
 
-const myPow = (x, n) => {
-  if (n === 0) return 1;
-  if (n === 1) return x;
-  if (n === -1) return 1 / x;
-  if (n % 2 === 0) {
-    let y = myPow(x, n / 2);
-    return y * y;
+var intersection = function(nums1, nums2) {
+  let store = new Set();
+
+  for (let num of nums1) {
+    store.add(num);
   }
-  return x * myPow(x, n - 1);
+
+  let store2 = new Set();
+
+  for (let num of nums2) {
+    if (store.has(num)) {
+      store2.add(num);
+    }
+  }
+
+  return Array.from(store2);
 };
