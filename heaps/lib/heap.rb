@@ -52,11 +52,15 @@ class BinaryMinHeap
     if val < child1
       if child1 < child2
         # swap with child 1
-      else 
+        array[child_idxs[0]], array[parent_index] = array[parent_index], array[child_idxs[0]]
+      else
         # swap with child 2
+        array[child_idxs[1]], array[parent_index] = array[parent_index], array[child_idxs[1]]
       end
     elsif val < child2
       # swap with child 2
+      array[child_idxs[1]], array[parent_index] = array[parent_index], array[child_idxs[1]]
+      self.cla
     end
   end
 
