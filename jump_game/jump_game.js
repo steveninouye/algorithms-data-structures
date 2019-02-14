@@ -20,13 +20,13 @@ jump length is 0, which makes it impossible to reach the last index.
 */
 
 const canJump = (nums) => {
-  let index = 0;
-  let last = nums.length - 1;
-  while (index < last) {
-    let jump = nums[index];
-    if (jump === 0 && index !== nums.length - 1) return false;
-    index += jump;
+  let max = nums[0];
+
+  for (let i = 1; i < nums.length; i++) {
+    if (max < i) return false;
+    max = Math.max(nums[i] + i, max);
   }
+
   return true;
 };
 
