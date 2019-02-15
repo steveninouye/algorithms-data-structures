@@ -62,7 +62,7 @@ class BinaryMinHeap
 
     if prc.call(val, array[min_idx]) === 1
       array[min_idx], array[parent_idx] = array[parent_idx], array[min_idx]
-      BinaryMinHeap.heapify_down(array, min_idx, &prc)
+      BinaryMinHeap.heapify_down(array, min_idx, len, &prc)
     end
 
     return array
