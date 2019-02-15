@@ -47,21 +47,24 @@ class BinaryMinHeap
 
   def self.heapify_down(array, parent_idx, len = array.length, &prc)
     val = array[parent_idx]
-    child_idxs = self.class(len, parent_idx)
-    child1, child2 = array[child_idxs[0]], aarray[child_idxs[1]]
-    if val < child1
-      if child1 < child2
-        # swap with child 1
-        array[child_idxs[0]], array[parent_index] = array[parent_index], array[child_idxs[0]]
-      else
-        # swap with child 2
-        array[child_idxs[1]], array[parent_index] = array[parent_index], array[child_idxs[1]]
-      end
-    elsif val < child2
-      # swap with child 2
-      array[child_idxs[1]], array[parent_index] = array[parent_index], array[child_idxs[1]]
-      self.cla
+    child_idxs = BinaryMinHeap.child_indices(len, parent_idx)
+
+    if child_idxs.length === 0
+      return array
+    elsif child_idxs.length === 1
+      min_idx = 0
+    else
+      child1 = array[child_idxs[0]]
+      child2 = array[child_idxs[1]]
+      min_idx = child2 < child1 ? child_idxs[1] : child_idxs[0]
     end
+
+    if array[min_idx] < val
+      array[min_idx], array[parent_idx] = array[parent_idx], array[min_idx]
+      BinaryMinHeap.heapify_down(array, min_idx)
+    end
+
+    return array
   end
 
   def self.heapify_up(array, child_idx, len = array.length, &prc)
