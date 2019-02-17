@@ -4,11 +4,16 @@
   "description": "",
   "main": "index.js",
   "babel": {
-    "presets": ["@babel/preset-env"],
+    "presets": [
+      "@babel/preset-env"
+    ],
     "plugins": []
   },
   "scripts": {
-    "test": "jest"
+    "test": "npm run test:watch",
+    "test:watch": "jest --watch",
+    "test:watchAll": "jest --watchAll",
+    "test:coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
