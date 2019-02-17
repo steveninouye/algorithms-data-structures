@@ -27,23 +27,19 @@ const findMedianSortedArrays = (nums1, nums2) => {
   let totalLength = len1 + len2;
   let [short, shortLen, long, longLen] =
     len1 < len2 ? [nums1, len1, nums2, len2] : [nums2, len2, nums1, len1];
-  let shortTakeLeft = Math.floor(shortLen + 1 / 2);
-  let longTakeLeft = getLongTake(totalLength, shortTakeLeft);
-  let longMaxLeft = long[longTakeLeft - 1] || -Infinity;
-  let shortMaxLeft = short[shortTakeLeft - 1] || -Infinity;
-  let longMinRight = long[longTakeLeft] || Infinity;
-  let shortMinRight = short[shortTakeLeft] || Infinity;
-  let start = 0;
-  let end = short.length;
-  while (
-    Math.max(longMaxLeft, shortMaxLeft) > Math.min(longMinRight, shortMinRight)
-  ) {
-    if (shortMaxLeft > longMinRight) {
-      // move min pointer left
-    } else {
-      // move min pointer right
+  if (short[shortLen - 1] < long[0] || short[0] > long[longLen - 1]) {
+    let idx = Math.floor((totalLength - 1) / 2);
+    if (short[shortLen - 1] < long[0]) {
+      idx -= shortLen;
     }
+    if (totalLength % 2 === 1) {
+      return long[idx];
+    } else {
+      return (long[idx] + long[idx + 1]) / 2;
+    }
+  } else {
   }
+  return true;
 };
 
 const getLongTake = (totalLength, shortTakeLeft) =>
