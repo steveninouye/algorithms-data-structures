@@ -1,6 +1,6 @@
 export class Node {
   constructor(val) {
-    this.val = val || null;
+    this.val = val;
   }
 }
 
