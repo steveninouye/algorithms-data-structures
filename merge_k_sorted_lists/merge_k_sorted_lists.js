@@ -14,17 +14,15 @@ class MinHeap {
     let result = this.store[0];
     let val = this.store.pop();
     this.store[0] = val;
-    let childIndexs = this.childIdxs(0)
-    while(childIndexs.length > 0) {
-      let validIdxs = childIndexs.filter(i => {
-        return this.store[i] < val
-      })
+    let childIndexs = this.childIdxs(0);
+    while (childIndexs.length > 0) {
+      let validIdxs = childIndexs.filter((i) => {
+        return this.store[i] < val;
+      });
       if (validIdxs.length === 0) {
         break;
-      } else if(validIdxs.length === 1) {
-
+      } else if (validIdxs.length === 1) {
       } else {
-        
       }
     }
     return result;
@@ -41,7 +39,7 @@ class MinHeap {
         let temp = child;
         child = parent;
         parent = temp;
-        childIndex = parentIndex
+        childIndex = parentIndex;
         parentIndex = this.parentIdx(childIndex);
       } else {
         parentIndex = null;
@@ -75,4 +73,4 @@ const mergeKLists = (list) => {
   return result;
 };
 
-module.exports = { ListNode, mergeKLists };
+module.exports = { MinHeap, ListNode, mergeKLists };
