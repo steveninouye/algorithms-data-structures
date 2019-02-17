@@ -65,25 +65,35 @@ describe('MinHeap', () => {
     expect(MinHeap).toBeDefined();
   });
 
-  it('should have a store', () => {});
+  describe('#store prototype', () => {
+    let heap;
 
-  it('its store should be type array', () => {
-    expect();
+    beforeEach(() => {
+      heap = new MinHeap();
+    });
+
+    it('should have a store', () => {
+      expect(heap.store).toEqual([]);
+    });
+
+    it('should have push function on its prototype', () => {
+      expect(heap.push).toBeDefined();
+    });
+
+    it('should have extract function on its prototype', () => {
+      
+    });
+
+    it('should be able to push values onto its store', () => {});
+
+    it('should heapify up when pushing on value', () => {});
+
+    it('should return value at first index', () => {});
+
+    it('should remove first value from its store', () => {});
+
+    it('should move last index to first index then heapify down from first index', () => {});
   });
-
-  it('should have push function on its prototype', () => {});
-
-  it('should have extract function on its prototype', () => {});
-
-  it('should be able to push values onto its store', () => {});
-
-  it('should heapify up when pushing on value', () => {});
-
-  it('should return value at first index', () => {});
-
-  it('should remove first value from its store', () => {});
-
-  it('should move last index to first index then heapify down from first index', () => {});
 });
 
 describe('#mergeKLists', () => {
