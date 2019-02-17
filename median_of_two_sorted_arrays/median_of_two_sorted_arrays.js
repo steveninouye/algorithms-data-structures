@@ -24,18 +24,29 @@ const findMedianSortedArrays = (nums1, nums2) => {
   // find the center index number O(1);
   let len1 = nums1.length;
   let len2 = nums2.length;
-  let isOdd = (len1 + len2) % 2 === 1;
+  let totalLength = len1 + len2;
   let [short, shortLen, long, longLen] =
     len1 < len2 ? [nums1, len1, nums2, len2] : [nums2, len2, nums1, len1];
-  let shortMidPt = Math.floor(shortLen - 1 / 2);
-  let longMidPt = Math.ceil((len1 + len2)/2) - shortMidPt - 2;
-  let longMaxLeft = long[longMidPt ] || -Infinity
-  let shortMaxLeft = short[shortMidPt] || -Infinity
-  let longMinRight = long[longMidPt + 1] || Infinity
-  let shortMinRight = short[shortMidPt + 1] || Infinity
-  while(Math.max(longMaxLeft,shortMaxLeft) <= Math.min(longMinRight,shortMinRight)){
-    
+  let shortTakeLeft = Math.floor(shortLen + 1 / 2);
+  let longTakeLeft = getLongTake(totalLength, shortTakeLeft);
+  let longMaxLeft = long[longTakeLeft - 1] || -Infinity;
+  let shortMaxLeft = short[shortTakeLeft - 1] || -Infinity;
+  let longMinRight = long[longTakeLeft] || Infinity;
+  let shortMinRight = short[shortTakeLeft] || Infinity;
+  let start = 0;
+  let end = short.length;
+  while (
+    Math.max(longMaxLeft, shortMaxLeft) > Math.min(longMinRight, shortMinRight)
+  ) {
+    if (shortMaxLeft > longMinRight) {
+      // move min pointer left
+    } else {
+      // move min pointer right
+    }
   }
 };
+
+const getLongTake = (totalLength, shortTakeLeft) =>
+  Math.ceil(totalLength / 2) - shortTakeLeft;
 
 module.exports = findMedianSortedArrays;
