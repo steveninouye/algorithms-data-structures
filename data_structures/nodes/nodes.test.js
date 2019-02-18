@@ -1,4 +1,4 @@
-import { Test, Node, SinglyLinkNode } from './nodes';
+import { Test, Node, SinglyLinkNode, DoublyLinkNode } from './nodes';
 
 let node, node1, node2, node3, node4;
 let child, child1, child2, child3, child4;
@@ -33,15 +33,20 @@ describe('Singly Link Node', () => {
 
   describe('#constructor', () => {
     beforeEach(() => {
-      node = new SinglyLinkNode();
+      node = new SinglyLinkNode(1);
     });
 
     it('should extend Node class', () => {
       expect(node).toBeInstanceOf(Node);
+      expect(node.val).toBe(1);
     });
 
-    it("node's #next should default to null", () => {
+    it('should assign #next as null', () => {
       expect(node.next).toBeNull();
+    });
+
+    it('should not have #prev defined', () => {
+      expect(node.prev).toBeUndefined();
     });
   });
 
@@ -64,6 +69,84 @@ describe('Singly Link Node', () => {
       node.next.next = node2;
       expect(node.next.next.val).toBe(6);
       expect(node.next.next.next.val).toBe(7);
+    });
+  });
+});
+
+describe('Doubly Link Node', () => {
+  it('should be defined', () => {
+    expect(DoublyLinkNode).toBeDefined();
+  });
+
+  describe('#constructor', () => {
+    beforeEach(() => {
+      node = new DoublyLinkNode(3);
+    });
+
+    it('should extend Singly Link Node class', () => {
+      expect(node).toBeInstanceOf(SinglyLinkNode);
+      expect(node.val).toBe(3);
+    });
+
+    it('should assign #prev & #next as null', () => {
+      expect(node.prev).toBeNull();
+      expect(node.next).toBeNull();
+    });
+  });
+
+  describe('#next', () => {
+    it('should be able to assign a next value', () => {
+      node.next = 5;
+      expect(node.next).toBe(5);
+    });
+  });
+
+  describe('#prev', () => {
+    it('should be able to assign a next value', () => {
+      node.prev = 8;
+      expect(node.prev).toBe(8);
+    });
+  });
+
+  describe('#remove', () => {
+    beforeEach(() => {
+      node = new DoublyLinkNode(4);
+      node1 = new DoublyLinkNode(5);
+      node2 = new DoublyLinkNode(6);
+      node3 = new DoublyLinkNode(7);
+      node.next = node1;
+      node1.next = node2;
+      node2.prev = node1;
+      node1.prev = node;
+      node2.next = node3;
+      node3.prev = node2;
+      node1.remove();
+    });
+
+    it('should remove itself from previous node and next node', () => {
+      expect(node.next).not.toBe(node1);
+      expect(node2.prev).not.toBe(node1);
+    });
+
+    it("next node's prev should be previous node", () => {
+      expect(node2.prev).toBe(node);
+    });
+
+    it("previous node's next should be next node", () => {
+      expect(node.next).toBe(node2);
+    });
+
+    it('should set its own #next and #prev values to null', () => {
+      expect(node1.next).toBeNull();
+      expect(node1.prev).toBeNull();
+    });
+
+    it('should not error if first (head) node', () => {
+      expect(() => node3.remove()).not.toThrowError();
+    });
+
+    it('should not error if last (tail) node', () => {
+      expect(() => node.remove()).not.toThrowError();
     });
   });
 });

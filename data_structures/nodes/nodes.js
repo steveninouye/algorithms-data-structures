@@ -19,8 +19,8 @@ export class DoublyLinkNode extends SinglyLinkNode {
 
   remove() {
     let { prev, next } = this;
-    this.next.prev = prev;
-    this.prev.next = next;
+    if (this.next) this.next.prev = prev;
+    if (this.prev) this.prev.next = next;
     this.next = null;
     this.prev = null;
     return this.val;
