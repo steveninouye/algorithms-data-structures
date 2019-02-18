@@ -26,11 +26,3 @@ export class DoublyLinkNode extends SinglyLinkNode {
     return this;
   }
 }
-
-export class BinaryTreeNode extends Node {
-  constructor(val) {
-    super(val);
-    this.left = null;
-    this.right = null;
-  }
-}

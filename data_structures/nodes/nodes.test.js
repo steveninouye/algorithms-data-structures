@@ -1,7 +1,6 @@
-import { Test, Node, SinglyLinkNode, DoublyLinkNode } from './nodes';
+import { Node, SinglyLinkNode, DoublyLinkNode } from './nodes';
 
-let node, node1, node2, node3, node4;
-let child, child1, child2, child3, child4;
+let node, node1, node2, node3;
 
 describe('Node', () => {
   it('should be defined', () => {
