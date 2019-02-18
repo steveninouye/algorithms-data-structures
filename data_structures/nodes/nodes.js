@@ -23,7 +23,7 @@ export class DoublyLinkNode extends SinglyLinkNode {
     if (this.prev) this.prev.next = next;
     this.next = null;
     this.prev = null;
-    return this.val;
+    return this;
   }
 }
 

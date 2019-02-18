@@ -141,6 +141,10 @@ describe('Doubly Link Node', () => {
       expect(node1.prev).toBeNull();
     });
 
+    it('should return itself', () => {
+      expect(node1.remove()).toBe(node1);
+    });
+
     it('should not error if first (head) node', () => {
       expect(() => node3.remove()).not.toThrowError();
     });
