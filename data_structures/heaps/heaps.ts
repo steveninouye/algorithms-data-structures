@@ -22,7 +22,7 @@ export class Heap {
     this.cb = cb;
   }
 
-  extract() {
+  extract(): number {
     const result: number = this.store[0];
     this.store[0] = this.store.pop();
 
@@ -65,11 +65,14 @@ export class Heap {
     return result;
   }
 
-  push(val: number) {
+  push(val: number): Heap {
     this.store.push(val);
+
+    
+    return this;
   }
 
-  peek() {
+  peek(): number {
     return this.store[0];
   }
 }
