@@ -107,7 +107,7 @@ describe('Heap', () => {
     });
   });
 
-  describe('#peak', () => {
+  describe('#peek', () => {
     it('should show the first element in the store', () => {
       const heap = new Heap();
       heap.store = [1, 2, 3];
@@ -165,7 +165,7 @@ describe('MinHeap', () => {
     });
   });
 
-  describe('#peak', () => {
+  describe('#peek', () => {
     it('should show the first element in the store', () => {
       const heap = new Heap();
       heap.store = [1, 2, 3];
@@ -179,10 +179,55 @@ describe('MaxHeap', () => {
     expect(MaxHeap).toBeDefined();
   });
 
+  it('should extend Heap class', () => {
+    const heap = new MaxHeap();
+    expect(heap).toBeInstanceOf(Heap);
+  });
+
   describe('#constructor', () => {
     it('should set callback to max sort', () => {
       const heap = new MaxHeap();
       expect(heap.cb).toBe(maxSort);
+    });
+  });
+
+  describe('#extract', () => {
+    const heap = new MaxHeap();
+    heap.store = [9, 8, 7, 6, 5, 4];
+
+    it('should return the first element', () => {
+      expect(heap.extract()).toBe(9);
+    });
+
+    it('should heapify down the last element from the first index', () => {
+      expect(heap.store).toEqual([8, 6, 7, 4, 5]);
+    });
+  });
+
+  describe('#push', () => {
+    const heap = new MaxHeap();
+    heap.store = [7, 6, 5, 4];
+
+    it('should add new value to store', () => {
+      heap.push(3);
+      expect(heap.store).toContain(3);
+    });
+
+    it('should return Heap', () => {
+      expect(heap.push(2)).toBe(heap);
+    });
+
+    it('should heapify up new value', () => {
+      heap.push(8);
+      expect(heap.store).toEqual([8, 6, 7, 4, 3, 2, 5]);
+    });
+  });
+
+  describe('#peek', () => {
+    it('should show the first element in the store', () => {
+      const heap = new MaxHeap();
+      heap.store = [3, 2, 1];
+      expect(heap.peek()).toBe(3);
     });
   });
 });
