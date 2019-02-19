@@ -107,13 +107,13 @@ describe('Heap', () => {
     });
   });
 
-  describe("#peak", () => {
+  describe('#peak', () => {
     it('should show the first element in the store', () => {
       const heap = new Heap();
-      heap.store = [1,2,3]
-      expect(heap.peek()).toBe(1)
-    })
-  })
+      heap.store = [1, 2, 3];
+      expect(heap.peek()).toBe(1);
+    });
+  });
 });
 
 describe('MinHeap', () => {
@@ -121,11 +121,23 @@ describe('MinHeap', () => {
     expect(MinHeap).toBeDefined();
   });
 
-  
+  describe('#constructor', () => {
+    it('should set callback to min sort', () => {
+      const heap = new MinHeap();
+      expect(heap.cb).toBe(minSort);
+    });
+  });
 });
 
 describe('MaxHeap', () => {
   it('should be defined', () => {
     expect(MaxHeap).toBeDefined();
+  });
+
+  describe('#constructor', () => {
+    it('should set callback to max sort', () => {
+      const heap = new MaxHeap();
+      expect(heap.cb).toBe(maxSort);
+    });
   });
 });

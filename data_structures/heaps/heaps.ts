@@ -73,7 +73,6 @@ export class Heap {
     let parentVal: number = this.store[parentIndex];
 
     while (this.cb(val, parentVal) < 0) {
-      // heapify up
       this.store[idx] = parentVal;
       this.store[parentIndex] = val;
 
