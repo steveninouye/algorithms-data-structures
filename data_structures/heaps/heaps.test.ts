@@ -121,10 +121,55 @@ describe('MinHeap', () => {
     expect(MinHeap).toBeDefined();
   });
 
+  it('should extend Heap class', () => {
+    const heap = new MinHeap();
+    expect(heap).toBeInstanceOf(Heap);
+  });
+
   describe('#constructor', () => {
     it('should set callback to min sort', () => {
       const heap = new MinHeap();
       expect(heap.cb).toBe(minSort);
+    });
+  });
+
+  describe('#extract', () => {
+    const heap = new MinHeap();
+    heap.store = [4, 5, 6, 7, 8, 9];
+
+    it('should return the first element', () => {
+      expect(heap.extract()).toBe(4);
+    });
+
+    it('should heapify down the last element from the first index', () => {
+      expect(heap.store).toEqual([5, 7, 6, 9, 8]);
+    });
+  });
+
+  describe('#push', () => {
+    const heap = new MinHeap();
+    heap.store = [6, 7, 8, 9];
+
+    it('should add new value to store', () => {
+      heap.push(10);
+      expect(heap.store).toContain(10);
+    });
+
+    it('should return Heap', () => {
+      expect(heap.push(11)).toBe(heap);
+    });
+
+    it('should heapify up new value', () => {
+      heap.push(3);
+      expect(heap.store).toEqual([3, 7, 6, 9, 10, 11, 8]);
+    });
+  });
+
+  describe('#peak', () => {
+    it('should show the first element in the store', () => {
+      const heap = new Heap();
+      heap.store = [1, 2, 3];
+      expect(heap.peek()).toBe(1);
     });
   });
 });
