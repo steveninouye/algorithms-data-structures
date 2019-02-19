@@ -4,7 +4,7 @@ export class BinaryTreeNode extends Node {
   left: BinaryTreeNode;
   right: BinaryTreeNode;
 
-  constructor(val) {
+  constructor(val: any) {
     super(val);
     this.left = null;
     this.right = null;
