@@ -2,7 +2,8 @@ export class Node {
   val: any | null | undefined;
 
   constructor(val?: any) {
-    this.val = val || null;
+    val = val === null || val === undefined ? null : val;
+    this.val = val;
   }
 }
 

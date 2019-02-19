@@ -14,11 +14,22 @@ const convertArrayIntoBinaryTree = (arr: any[]): BinaryTreeNode => {
   for (let i = 1; i < arr.length; i++) {
     const val: any = arr[i];
 
-    if (val !== null && i % 2 === 1) {
-      store[parentIdx].left = new BinaryTreeNode(val);
+    if (i % 2 === 1) {
+      if (val === null) {
+        store.push(null);
+      } else {
+        node = new BinaryTreeNode(val);
+        store[parentIdx].left = node;
+
+        store.push(node);
+      }
     } else {
-      if (val !== null) {
-        store[parentIdx].right = new BinaryTreeNode(val);
+      if (val === null) {
+        store.push(null);
+      } else {
+        node = new BinaryTreeNode(val);
+        store[parentIdx].right = node;
+        store.push(node);
       }
       parentIdx++;
     }
@@ -26,6 +37,29 @@ const convertArrayIntoBinaryTree = (arr: any[]): BinaryTreeNode => {
 
   return store[0];
 };
+
+describe('convertArrayIntoBinaryTree', () => {
+  it('should convert array into binary tree', () => {
+    let root: BinaryTreeNode = convertArrayIntoBinaryTree([
+      3,
+      5,
+      1,
+      6,
+      2,
+      0,
+      8,
+      null,
+      null,
+      7,
+      4
+    ]);
+    expect(root.left.right.val).toBe(2);
+    expect(root.left.left.val).toBe(6);
+    expect(root.left.left.left).toBeNull();
+    expect(root.right.right.val).toBe(8);
+    expect(root.right.left.val).toBe(0);
+  });
+});
 
 describe('lowestCommonAncestor', () => {
   it('should be defined', () => {
