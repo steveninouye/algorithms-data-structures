@@ -52,10 +52,15 @@ describe('Heap', () => {
   describe('#constructor', () => {
     it('should be able to take a callback', () => {
       const fn = () => 888;
-      const heap = new Heap(fn);
-      expect(heap.cb).toBe(fn);
-      expect(typeof heap.cb).toBe('function');
-      expect(heap.cb()).toBe(888);
+      const heap = new Heap();
+      expect(heap.cb).toBe(maxSort);
+      // expect(heap.cb).toBe(fn);
+      // expect(typeof heap.cb).toBe('function');
+      // expect(heap.cb()).toBe(888);
+      // const mock = jest.fn()
+      // mock(heap.cb)
+      // mock()
+      // expect(minSort).toBeCalled()
     });
   });
 });

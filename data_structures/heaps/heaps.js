@@ -16,7 +16,7 @@ export const parentIdx = (idx) => {
 export class Heap {
   constructor(cb) {
     this.store = [];
-    this.cb = cb;
+    this.cb = cb 
   }
 
   extract() {
@@ -42,7 +42,7 @@ export class Heap {
         const [childIdx1, childIdx2] = validChildren;
         const childVal1 = this.store[childIdx1];
         const childVal2 = this.store[childIdx2];
-        
+
         idx = this.cb(childVal1, childVal2) < 0 ? childIdx1 : childIdx2;
       }
 
