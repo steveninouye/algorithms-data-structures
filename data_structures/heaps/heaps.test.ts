@@ -106,12 +106,22 @@ describe('Heap', () => {
       expect(heap.store).toEqual([3, 7, 6, 9, 10, 11, 8]);
     });
   });
+
+  describe("#peak", () => {
+    it('should show the first element in the store', () => {
+      const heap = new Heap();
+      heap.store = [1,2,3]
+      expect(heap.peek()).toBe(1)
+    })
+  })
 });
 
 describe('MinHeap', () => {
   it('should be defined', () => {
     expect(MinHeap).toBeDefined();
   });
+
+  
 });
 
 describe('MaxHeap', () => {
