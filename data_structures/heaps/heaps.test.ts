@@ -74,4 +74,29 @@ describe('Heap', () => {
       expect(heap2.cb(7, 5)).toBe(2);
     });
   });
+
+  describe('#extract', () => {
+    let heap = new Heap(minSort);
+    heap.store = [4, 5, 6, 7, 8, 9];
+
+    it('should return the first element', () => {
+      expect(heap.extract()).toBe(4);
+    });
+
+    it('should heapify down the last element from the first index', () => {
+      expect(heap.store).toEqual([5, 7, 6, 9, 8]);
+    });
+  });
+});
+
+describe('MinHeap', () => {
+  it('should be defined', () => {
+    expect(MinHeap).toBeDefined();
+  });
+});
+
+describe('MaxHeap', () => {
+  it('should be defined', () => {
+    expect(MaxHeap).toBeDefined();
+  });
 });
