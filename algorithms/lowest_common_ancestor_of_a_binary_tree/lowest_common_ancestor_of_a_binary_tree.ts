@@ -37,24 +37,10 @@ p and q are different and both values will exist in the binary tree.
  * @returns {BinaryTreeNode}
  */
 const lowestCommonAncestor = (root, p, q) => {
-  const stack: BinaryTreeNode[] = [];
-  let isLeftFound:boolean
-  let isRightFound:boolean
-  let node = root
-  stack.push(node)
-  while(stack.length > 0) {
-    
-  }
-  return root;
+  if (!root || root.val === p || root.val === q) return root;
+  const left = lowestCommonAncestor(root.left, p, q);
+  const right = lowestCommonAncestor(root.right, p, q);
+  return !left ? right : !right ? left : root;
 };
-
-/**
- *
- *
- * @param {BinaryTreeNode} root
- * @param {boolean} left
- * @param {boolean} right
- */
-const findLeftAndRightNode = (root, left, right) => {};
 
 export default lowestCommonAncestor;
