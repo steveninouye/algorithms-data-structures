@@ -36,11 +36,39 @@ p and q are different and both values will exist in the binary tree.
  * @param {number} q
  * @returns {BinaryTreeNode}
  */
+// const lowestCommonAncestor = (root, p, q) => {
+//   if (!root || root.val === p || root.val === q) return root;
+//   const left = lowestCommonAncestor(root.left, p, q);
+//   const right = lowestCommonAncestor(root.right, p, q);
+//   return !left ? right : !right ? left : root;
+// };
 const lowestCommonAncestor = (root, p, q) => {
-  if (!root || root.val === p || root.val === q) return root;
-  const left = lowestCommonAncestor(root.left, p, q);
-  const right = lowestCommonAncestor(root.right, p, q);
-  return !left ? right : !right ? left : root;
+  const stack = [root];
+  const parents = { [root.val]: { self: root, parent: null } };
+  while (!parents[p] || !parents[q]) {
+    const node = stack.pop();
+    if (node.left) {
+      let left = node.left;
+      stack.push(left);
+      parents[left.val] = { self: left, parent: node };
+    }
+    if (node.right) {
+      let right = node.right;
+      stack.push(right);
+      parents[right.val] = { self: right, parent: node };
+    }
+  }
+  const acenstors = {};
+  while (p) {
+    acenstors[p] = parents[p].self;
+    if (!parents[p].parent) break;
+    p = parents[p].parent.val;
+  }
+  while (!acenstors[q]) {
+    if (!parents[q].parent) break;
+    q = parents[q].parent.val;
+  }
+  return acenstors[q];
 };
 
 export default lowestCommonAncestor;
