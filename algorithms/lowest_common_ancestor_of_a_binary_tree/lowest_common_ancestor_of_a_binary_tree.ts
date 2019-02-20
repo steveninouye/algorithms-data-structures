@@ -27,12 +27,34 @@ Note:
 All of the nodes' values will be unique.
 p and q are different and both values will exist in the binary tree.
 */
-const lowestCommonAncestor = (
-  root: BinaryTreeNode,
-  p: number,
-  q: number
-): BinaryTreeNode => {
+
+/**
+ *
+ *
+ * @param {BinaryTreeNode} root
+ * @param {number} p
+ * @param {number} q
+ * @returns {BinaryTreeNode}
+ */
+const lowestCommonAncestor = (root, p, q) => {
+  const stack: BinaryTreeNode[] = [];
+  let isLeftFound:boolean
+  let isRightFound:boolean
+  let node = root
+  stack.push(node)
+  while(stack.length > 0) {
+    
+  }
   return root;
 };
+
+/**
+ *
+ *
+ * @param {BinaryTreeNode} root
+ * @param {boolean} left
+ * @param {boolean} right
+ */
+const findLeftAndRightNode = (root, left, right) => {};
 
 export default lowestCommonAncestor;

@@ -65,4 +65,28 @@ describe('lowestCommonAncestor', () => {
   it('should be defined', () => {
     expect(lowestCommonAncestor).toBeDefined();
   });
+
+  let root: BinaryTreeNode = convertArrayIntoBinaryTree([
+    3,
+    5,
+    1,
+    6,
+    2,
+    0,
+    8,
+    null,
+    null,
+    7,
+    4
+  ]);
+
+  it('should return lowest common parent if nodes are not descendants of the other', () => {
+    expect(lowestCommonAncestor(root, 5, 1)).toBeInstanceOf(BinaryTreeNode);
+    expect(lowestCommonAncestor(root, 5, 1).val).toBe(3);
+  });
+
+  it('should return parent node if parent node equals one and child equals other', () => {
+    expect(lowestCommonAncestor(root, 5, 4)).toBeInstanceOf(BinaryTreeNode);
+    expect(lowestCommonAncestor(root, 5, 4).val).toBe(5);
+  });
 });
