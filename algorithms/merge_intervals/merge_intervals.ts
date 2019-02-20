@@ -24,8 +24,27 @@ Explanation: Intervals [1,4] and [4,5] are considered overlapping.
  * @param {Interval[]} intervals
  * @return {Interval[]}
  */
-const merge = (intervals) =>{
-    
+const merge = (intervals) => {
+  intervals.sort((a, b) => a.start - b.start);
+  return intervals.reduce((acc, curr, idx) => {
+    if (idx === 0) return [curr];
+
+    let lastIdx = acc.length - 1;
+    let last = acc[lastIdx];
+    if (curr.start <= last.end) {
+      if (curr.start <= last.start) {
+      } else {
+        curr.start = last.start;
+      }
+      if (curr.end <= last.end) {
+        curr.end = last.end;
+      }
+      acc[lastIdx] = curr;
+    } else {
+      acc.push(curr);
+    }
+    return acc;
+  }, []);
 };
 
-export default merge
+export default merge;
