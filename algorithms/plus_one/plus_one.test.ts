@@ -14,4 +14,9 @@ describe('plus one', () => {
     expect(plusOne([1, 2, 9])).toEqual([1, 3, 0]);
     expect(plusOne([4, 3, 2, 9])).toEqual([4, 3, 3, 0]);
   });
+
+  it('should roll plus one to the previous element until the previous element is less than 9', () => {
+    expect(plusOne([9, 9, 9])).toEqual([1, 0, 0, 0]);
+    expect(plusOne([4, 9, 9, 9])).toEqual([5, 0, 0, 0]);
+  });
 });

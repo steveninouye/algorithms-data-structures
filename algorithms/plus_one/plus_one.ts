@@ -16,13 +16,25 @@ Input: [4,3,2,1]
 Output: [4,3,2,2]
 Explanation: The array represents the integer 4321.
 */
-
 /**
  * @param {number[]} digits
  * @return {number[]}
  */
 const plusOne = (digits) => {
-    
+  let carry: number = 0;
+  let lastIdx: number = digits.length - 1;
+  for (let i = lastIdx; i >= 0; i--) {
+    if (digits[i] === 9) {
+      carry = 1;
+      digits[i] = 0;
+    } else {
+      carry = 0;
+      digits[i] += 1;
+      break;
+    }
+  }
+  if (carry === 1) digits.unshift(1);
+  return digits;
 };
 
-export default plusOne
+export default plusOne;
