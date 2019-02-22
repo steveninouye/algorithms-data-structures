@@ -25,8 +25,24 @@ Given 1->2->3->4, you should return the list as 2->1->4->3.
  * @return {SinglyLinkNode}
  */
 const swapPairs = (head) => {
-  
-  return head;
+  if (!head) return null;
+  let top = new SinglyLinkNode(0);
+  let prev = top;
+  let node1 = head;
+  let node2 = head.next;
+  while (node2) {
+    let tail = node2.next;
+    prev.next = node2;
+    prev.next.next = node1;
+    prev = prev.next.next;
+    if (tail) {
+      node1 = tail;
+      node2 = tail.next;
+    } else {
+      break;
+    }
+  }
+  return top.next;
 };
 
 export default swapPairs;
