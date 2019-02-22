@@ -1,3 +1,5 @@
+import { SinglyLinkNode } from '../../data_structures/nodes/nodes';
+
 /*
 https://leetcode.com/problems/swap-nodes-in-pairs/
 Given a linked list, swap every two adjacent nodes and return its head.
@@ -19,9 +21,12 @@ Given 1->2->3->4, you should return the list as 2->1->4->3.
  * }
  */
 /**
- * @param {ListNode} head
- * @return {ListNode}
+ * @param {SinglyLinkNode} head
+ * @return {SinglyLinkNode}
  */
-const swapPairs = (head) => {};
+const swapPairs = (head) => {
+  
+  return head;
+};
 
 export default swapPairs;

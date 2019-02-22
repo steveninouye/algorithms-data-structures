@@ -8,7 +8,7 @@ export class Node {
 }
 
 export class SinglyLinkNode extends Node {
-  next: Node;
+  next: SinglyLinkNode;
 
   constructor(val) {
     super(val);
