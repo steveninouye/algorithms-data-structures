@@ -32,9 +32,9 @@ const swapPairs = (head) => {
   let node2 = head.next;
   while (node2) {
     let tail = node2.next;
+    node2.next = node1;
     prev.next = node2;
-    prev.next.next = node1;
-    prev = prev.next.next;
+    prev = node1;
     if (tail) {
       node1 = tail;
       node2 = tail.next;
