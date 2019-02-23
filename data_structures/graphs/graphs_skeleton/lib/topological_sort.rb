@@ -35,12 +35,18 @@ end
 
 def topological_sort(vertices)
   result = Array.new
-  visited = Set.new
+  visited_vertices = Set.new
   vertices.each do |vertex|
-    dfs!(vertex, visited, result) unless visited.include?(vertex)
+    dfs!(vertex, visited_vertices, result) unless visited_vertices.include?(vertex)
   end
   result.reverse!
 end
 
-def dfs!(vertex, visited, result)
+def dfs!(vertex, visited_vertices, result)
+  return nil if visited_vertices.include?(vertex)
+  visited_vertices.add(vertex)
+  vertex.out_edges.each do |edge|
+    dfs!(edge.to_vertex, visited_vertices, result)
+  end
+  result.push(vertex)
 end
