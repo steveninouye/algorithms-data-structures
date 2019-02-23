@@ -16,13 +16,25 @@ def topological_sort(vertices)
     end
   end
 
-  
+  until queue.empty?
+    vertex = queue.shift
+
+    vertex.out_edges.each do |edge|
+      to_vertex = edge.to_vertex
+      edges[to_vertex] -= edge.cost
+      queue << to_vertex if edges[to_vertex] == 0
+    end
+
+    sorted_vertices << vertex
+  end
+
+  sorted_vertices
 end
 
 # Tarjans
 
-def topological_sort(vertices)
-end
+# def topological_sort(vertices)
+# end
 
-def dfs!(vertex, explored, ordering)
-end
+# def dfs!(vertex, explored, ordering)
+# end
