@@ -10,7 +10,8 @@ describe('unique paths', () => {
   });
 
   it('should return the number of unique paths', () => {
-    expect(uniquePaths(3, 2)).toBe(28);
+    expect(uniquePaths(3, 2)).toBe(3);
+    expect(uniquePaths(7, 3)).toBe(28);
   });
 
   it('should throw an error if input is less than or equal to 0', () => {

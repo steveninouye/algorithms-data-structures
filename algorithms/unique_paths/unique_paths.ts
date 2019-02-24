@@ -35,8 +35,8 @@ const uniquePaths = (m, n) => {
   if (m < 1 || n < 1) {
     throw new Error('input needs to be greater than 0');
   }
-  if(m === 1 || n === 1) return 1;
-  
+  if (m === 1 || n === 1) return 1;
+  return uniquePaths(m - 1, n) + uniquePaths(m, n - 1);
 };
 
 export default uniquePaths;
