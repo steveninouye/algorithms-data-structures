@@ -35,8 +35,30 @@ const uniquePaths = (m, n) => {
   if (m < 1 || n < 1) {
     throw new Error('input needs to be greater than 0');
   }
-  if (m === 1 || n === 1) return 1;
-  return uniquePaths(m - 1, n) + uniquePaths(m, n - 1);
+  if (m === 1 || n === 1) {
+    return 1;
+  } else if (m === n) {
+    return uniquePaths(m, n - 1) * 2;
+  } else {
+    return uniquePaths(m - 1, n) + uniquePaths(m, n - 1);
+  }
 };
 
-export default uniquePaths;
+const iUniquePaths = (m, n) => {
+  if (m < 1 || n < 1) throw 'input needs to be greater than 0';
+
+  const store: number[] = [];
+  for (let i = 0; i < m; i++) {
+    store.push(1);
+  }
+
+  for (let row = 1; row < n; row++) {
+    for (let col = 0; col < store.length; col++) {
+      store[col] += store[col - 1] || 0;
+    }
+  }
+
+  return store[m - 1];
+};
+
+export { iUniquePaths, uniquePaths };
