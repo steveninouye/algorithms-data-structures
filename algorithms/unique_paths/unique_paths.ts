@@ -31,6 +31,12 @@ Output: 28
  * @param {number} n
  * @return {number}
  */
-const uniquePaths = (m, n) => {};
+const uniquePaths = (m, n) => {
+  if (m < 1 || n < 1) {
+    throw new Error('input needs to be greater than 0');
+  }
+  if(m === 1 || n === 1) return 1;
+  
+};
 
 export default uniquePaths;
