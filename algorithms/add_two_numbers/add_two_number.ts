@@ -25,7 +25,7 @@ Explanation: 342 + 465 = 807.
  * @param {ListNode} l2
  * @returns {ListNode}
  */
-const addTwoNumbers = (l1, l2) => {
+const addTwoNumbers = (l1: ListNode, l2: ListNode): ListNode => {
   let carry = 0;
   let head = new ListNode(0);
   let curr = head;
