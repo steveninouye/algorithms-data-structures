@@ -19,10 +19,33 @@ Output: 7 -> 0 -> 8
 Explanation: 342 + 465 = 807.
 */
 /**
+ *
+ *
  * @param {ListNode} l1
  * @param {ListNode} l2
- * @return {ListNode}
+ * @returns {ListNode}
  */
-const addTwoNumbers = (l1, l2) => {};
+const addTwoNumbers = (l1, l2) => {
+  let carry = 0;
+  let head = new ListNode(0);
+  let curr = head;
+  while (l1 || l2) {
+    let val1 = l1 ? l1.val : 0;
+    let val2 = l2 ? l2.val : 0;
+    let sum = val1 + val2 + carry;
+    if (sum > 9) {
+      carry = 1;
+      sum -= 10;
+    } else {
+      carry = 0;
+    }
+    curr.next = new ListNode(sum);
+    curr = curr.next;
+    l1 = l1 ? l1.next : null;
+    l2 = l2 ? l2.next : null;
+  }
+  if (carry > 0) curr.next = new ListNode(carry);
+  return head.next;
+};
 
 export default addTwoNumbers;
