@@ -10,7 +10,7 @@
     "plugins": []
   },
   "scripts": {
-    "test": "npm run test:watch",
+    "test": "jest --watchAll",
     "test:watch": "jest --watch",
     "test:watchAll": "jest --watchAll",
     "test:coverage": "jest --coverage"
