@@ -10,15 +10,14 @@ Given nums = [2, 7, 11, 15], target = 9,
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 */
-const twoSum = (nums, target) => {
-  let obj = {};
-  let len = nums.length;
-  for (let i = 0; i < len; i++) {
-    let dif = target - nums[i];
-    if (obj[dif] !== undefined) {
-      return [i, obj[dif]];
-    } else {
-      obj[nums[i]] = i;
-    }
-  }
-};
+
+/**
+ *
+ *
+ * @param {number[]} nums
+ * @param {number} target
+ * @returns
+ */
+const twoSum = (nums, target) => {};
+
+export default twoSum;
