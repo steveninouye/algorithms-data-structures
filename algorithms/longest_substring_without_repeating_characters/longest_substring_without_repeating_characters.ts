@@ -22,20 +22,21 @@ Explanation: The answer is "wke", with the length of 3.
 */
 
 const lengthOfLongestSubstring = (str: string): number => {
-  if(str.length === 0) return 0;
-  let substring: string = str[0]
-  let slowIdx:number = 0
+  if (str.length === 0) return 0;
+  let currIdx: number = 0;
   let maxLength: number = 1;
-  let store = {[str[0]]: true}
-  for(let i = 1; i < str.length; i++) {
-    while(store[str[i]]){
-      // delete letters out of string and store until no repeated characters
+  let store = { [str[0]]: true };
+  for (let i = 1; i < str.length; i++) {
+    while (store[str[i]]) {
+      let ltr: string = str[currIdx];
+      delete store[ltr];
+      currIdx++;
     }
-    store[str[i]] = true
-    substring += str[i]
-    
+    store[str[i]] = true;
+    let currLength: number = i - currIdx + 1;
+    maxLength = maxLength < currLength ? currLength : maxLength;
   }
-  return maxLength
+  return maxLength;
 };
 
 export default lengthOfLongestSubstring;

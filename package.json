@@ -12,7 +12,6 @@
   "scripts": {
     "test": "jest --watchAll",
     "test:watch": "jest --watch",
-    "test:watchAll": "jest --watchAll",
     "test:coverage": "jest --coverage"
   },
   "repository": {
