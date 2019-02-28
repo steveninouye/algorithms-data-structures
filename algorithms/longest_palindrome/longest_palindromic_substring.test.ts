@@ -1,4 +1,24 @@
-import longestPalindrome from './longest_palindromic_substring';
+import {
+  isPalindrome,
+  longestPalindrome
+} from './longest_palindromic_substring';
+
+describe('#isPalindrome', () => {
+  it('should be defined', () => {
+    expect(longestPalindrome).toBeDefined();
+  });
+
+  it('should return true if string is a palindrome', () => {
+    expect(isPalindrome('racecar')).toBe(true);
+    expect(isPalindrome('lkracecarkl')).toBe(true);
+    expect(isPalindrome('hhhhhhh')).toBe(true);
+  });
+
+  it('should return false if string is not a palindrome', () => {
+    expect(isPalindrome('djkgfbsd')).toBe(false);
+    expect(isPalindrome('rt')).toBe(false);
+  });
+});
 
 describe('#longestPalindrom', () => {
   it('should be defined', () => {

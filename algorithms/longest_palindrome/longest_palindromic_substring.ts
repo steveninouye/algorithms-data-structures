@@ -19,22 +19,8 @@ Output: "bb"
  * @param {string} str
  * @returns {string}
  */
-const longestPalindrome = (str: string): string => {
+export const longestPalindrome = (str: string): string => {
   if (str.length === 0) return '';
-  let start = 0,
-    numChars = str.length;
-  while (numChars > 1) {
-    let shift = 0;
-    while (start + shift + numChars <= str.length) {
-      let partition = str.slice(start + shift, numChars + shift);
-      if (isPalindrome(partition)) {
-        return partition;
-      }
-      shift++;
-    }
-    numChars--;
-  }
-  return str[0];
 };
 
 /**
@@ -43,13 +29,12 @@ const longestPalindrome = (str: string): string => {
  * @param {string} str
  * @returns {boolean}
  */
-const isPalindrome = (str: string): boolean => {
-  for (let i = 0; i < str.length / 2; i++) {
-    if (str[i] !== str[str.length - 1 - i]) {
+export const isPalindrome = (str: string): boolean => {
+  const midPt = Math.floor(str.length / 2);
+  for (let i = 0; i < midPt; i++) {
+    if (str[i] !== str[str.length - i - 1]) {
       return false;
     }
   }
   return true;
 };
-
-export default longestPalindrome;
