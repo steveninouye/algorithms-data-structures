@@ -28,7 +28,9 @@ class Board {
     });
   }
 
-  move(direction: string) {}
+  move(direction: string) {
+    return null;
+  }
 
   render() {
     this.renderScore();
@@ -47,6 +49,35 @@ class Board {
     console.log('Adding New Tile');
     // set game over here
     return false;
+  }
+
+  directions(direction) {
+    switch (direction) {
+      case 'right':
+        return {
+          startTile: { row: this.height - 1, col: this.width - 1 },
+          tilesDelta: { row: -1, col: 0 },
+          tileDelta: { row: 0, col: -1 }
+        };
+      case 'down':
+        return {
+          startTile: { row: this.height - 1, col: 0 },
+          tilesDelta: { row: 0, col: 1 },
+          tileDelta: { row: -1, col: 0 }
+        };
+      case 'up':
+        return {
+          startTile: { row: 0, col: this.width - 1 },
+          tilesDelta: { row: 0, col: -1 },
+          tileDelta: { row: 1, col: 0 }
+        };
+      case 'left':
+        return {
+          startTile: { row: 0, col: 0 },
+          tilesDelta: { row: 1, col: 0 },
+          tileDelta: { row: 0, col: 1 }
+        };
+    }
   }
 }
 

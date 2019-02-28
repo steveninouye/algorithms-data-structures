@@ -13,7 +13,7 @@ class Game {
     this.board = new Board(4, 4);
     while (!this.isGameOver) {
       this.board.render();
-      const direction = this.getDirection();
+      const direction: string = this.getDirection();
       this.board.move(direction);
       this.board.render();
       this.isGameOver = this.board.addNewTile();
@@ -27,7 +27,7 @@ class Game {
   }
 
   renderGameResult(){
-    
+
   }
 }
 
