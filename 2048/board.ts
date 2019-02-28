@@ -1,15 +1,17 @@
+import Tile from './tile';
+
 class Board {
   matrix: number[][];
   height: number;
   width: number;
   score: number;
-  availablePositions: any[];
+  availableTiles: any[];
 
   constructor(height: number, width: number) {
     this.height = height;
     this.width = width;
     this.score = 0;
-    this.availablePositions = [];
+    this.availableTiles = [];
     this.createMatrix();
   }
 
@@ -18,16 +20,15 @@ class Board {
     this.matrix = rows.map((_, rowIdx) => {
       let row = [];
       for (let colIdx = 0; colIdx < this.width; colIdx++) {
-        row.push(undefined);
-        this.availablePositions.push({ row: rowIdx, col: colIdx });
+        const tile = new Tile(rowIdx, colIdx);
+        row.push(tile);
+        this.availableTiles.push(tile);
       }
       return row;
     });
   }
 
-  move(direction) {
-    
-  }
+  move(direction: string) {}
 
   render() {
     this.renderScore();
