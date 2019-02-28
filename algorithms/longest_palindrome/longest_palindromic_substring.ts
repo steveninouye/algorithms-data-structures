@@ -13,7 +13,13 @@ Input: "cbbd"
 Output: "bb"
 */
 
-var longestPalindrome = function(str) {
+/**
+ *
+ *
+ * @param {string} str
+ * @returns {string}
+ */
+const longestPalindrome = (str: string): string => {
   if (str.length === 0) return '';
   let start = 0,
     numChars = str.length;
@@ -31,7 +37,13 @@ var longestPalindrome = function(str) {
   return str[0];
 };
 
-const isPalindrome = (str) => {
+/**
+ *
+ *
+ * @param {string} str
+ * @returns {boolean}
+ */
+const isPalindrome = (str: string): boolean => {
   for (let i = 0; i < str.length / 2; i++) {
     if (str[i] !== str[str.length - 1 - i]) {
       return false;
@@ -40,5 +52,4 @@ const isPalindrome = (str) => {
   return true;
 };
 
-console.log(longestPalindrome('babad') === 'bab');
-console.log(longestPalindrome('cbbd') === 'bb');
+export default longestPalindrome;
