@@ -2,11 +2,13 @@ class Board {
   matrix: number[][];
   height: number;
   width: number;
+  score: number;
   availablePositions: any[];
 
   constructor(height: number, width: number) {
     this.height = height;
     this.width = width;
+    this.score = 0;
     this.availablePositions = [];
     this.createMatrix();
   }
@@ -23,16 +25,28 @@ class Board {
     });
   }
 
+  move(direction) {
+    
+  }
+
   render() {
     this.renderScore();
     this.renderMatrix();
   }
 
-  renderScore() {}
+  renderScore() {
+    console.log(this.score);
+  }
 
-  renderMatrix() {}
+  renderMatrix() {
+    console.log(this.matrix);
+  }
 
-  addNewTile() {}
+  addNewTile() {
+    console.log('Adding New Tile');
+    // set game over here
+    return false;
+  }
 }
 
 export default Board;
