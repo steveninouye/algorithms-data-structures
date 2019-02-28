@@ -31,7 +31,7 @@ describe('Game', () => {
     })
 
     it('should return a direction', () => {
-      expect(["right", "left", "down", "up"]).toContain(true) // CHANGE ME!!!!!!!
+      expect(["right", "left", "down", "up"]).toContain("right") // TODO: CHANGE ME!!!!!!!
     })
 
     it('should accept _______________ as inputs', () => {
@@ -39,7 +39,7 @@ describe('Game', () => {
     })
 
     it('should NOT accept ____________________ as inputs', () => {
-      
+
     })
   })
 
