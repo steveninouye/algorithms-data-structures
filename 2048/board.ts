@@ -1,7 +1,7 @@
 import Tile from './tile';
 
 class Board {
-  matrix: number[][];
+  matrix: Tile[][];
   height: number;
   width: number;
   score: number;
@@ -29,7 +29,58 @@ class Board {
   }
 
   move(direction: string) {
-    return null;
+    const { startTile, tilesDelta, tileDelta } = this.directions(direction);
+    let { row, col } = startTile;
+
+    this.availableTiles = [];
+
+    while (this.matrix[row] && this.matrix[row][col]) {
+      let row1 = row;
+      let col1 = col;
+      let row2 = row + tileDelta.row;
+      let col2 = col + tileDelta.col;
+
+      while (this.matrix[row2] && this.matrix[row2][col2]) {
+        const tile1: Tile = this.matrix[row1][col1];
+        const tile2: Tile = this.matrix[row2][col2];
+        if (tile1.val === null && tile2.val) {
+          this.shiftTile(tile1, tile2);
+        } else if (tile1.val && tile2.val) {
+          if(tile1.val === tile2.val) {
+            this.score += this.mergeTiles(row1,col1,row2,col2)
+          }
+          row1 += tileDelta.row;
+          col1 += tileDelta.col;
+          if(tile1.val !== tile2.val && tile2 !== this.matrix[row1][col1]) {
+            this.shiftTile(this.matrix[row1][col1], tile2);
+          }
+        }
+        row2 += tileDelta.row;
+        col2 += tileDelta.col;
+      }
+
+      while (this.matrix[row1] && this.matrix[row1][col1]) {
+        if (this.matrix[row1][col1].val === null) {
+          this.availableTiles.push(this.matrix[row1][col1]);
+        }
+        row1 += tileDelta.row;
+        col1 += tileDelta.col;
+      }
+
+      row += tilesDelta.row;
+      col += tilesDelta.col;
+    }
+  }
+
+  mergeTiles(row1: number, col1: number, row2: number, col2: number) {
+    this.matrix[row1][col1].val *= 2;
+    this.matrix[row2][col2].val = null;
+    return this.matrix[row1][col1].val;
+  }
+
+  shiftTile(toTile: Tile, fromTile: Tile): void {
+    toTile.val = fromTile.val;
+    fromTile.val = null;
   }
 
   render() {
