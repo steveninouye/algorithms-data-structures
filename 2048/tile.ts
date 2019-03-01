@@ -1,7 +1,4 @@
-const randValue = () => {
-  const randNum = Math.floor(Math.random() * 2);
-  return [2, 4][randNum];
-};
+import randomNum from './randomNumber';
 
 class Tile {
   val: number;
@@ -21,6 +18,11 @@ class Tile {
       this.val += fromTile.val;
     }
     fromTile.val = null;
+  }
+
+  random() {
+    const idx: number = randomNum(0, 1);
+    return [2, 4][idx];
   }
 }
 

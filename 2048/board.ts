@@ -31,55 +31,71 @@ class Board {
 
   move(direction: string) {
     const { startTile, tilesDelta, tileDelta } = directions[direction];
+    const { rowsDelta, colsDelta } = tilesDelta;
     let { row, col } = startTile;
     this.availableTiles = [];
 
     while (this.matrix[row] && this.matrix[row][col]) {
-      let slowRow = row;
-      let slowCol = col;
-      let fastRow = row + tileDelta.row;
-      let fastCol = col + tileDelta.col;
+      let slowPos = { slowRow: row, slowCol: col };
+      let fastPos = {
+        fastRow: row + tileDelta.row,
+        fastCol: col + tileDelta.col
+      };
 
-      while (this.matrix[fastRow] && this.matrix[fastRow][fastCol]) {
-        let slowTile: Tile = this.matrix[slowRow][slowCol];
-        const fastTile: Tile = this.matrix[fastRow][fastCol];
-        if (slowTile.val === null && fastTile.val) {
+      slowPos = this.shiftTiles(slowPos, fastPos, tileDelta);
+
+      this.findAvailableTiles(slowPos, tileDelta);
+
+      row += rowsDelta;
+      col += colsDelta;
+    }
+  }
+
+  shiftTiles(
+    { slowRow, slowCol }: { slowRow: number; slowCol: number },
+    { fastRow, fastCol }: { fastRow: number; fastCol: number },
+    { rowDelta, colDelta }: { rowDelta: number; colDelta: number }
+  ): { slowRow: number; slowCol: number } {
+    while (this.matrix[fastRow] && this.matrix[fastRow][fastCol]) {
+      let slowTile: Tile = this.matrix[slowRow][slowCol];
+      const fastTile: Tile = this.matrix[fastRow][fastCol];
+
+      if (slowTile.val === null && fastTile.val) {
+        slowTile.merge(fastTile);
+      } else if (slowTile.val && fastTile.val) {
+        if (slowTile.val === fastTile.val) {
           slowTile.merge(fastTile);
-        } else if (slowTile.val && fastTile.val) {
-          if (slowTile.val === fastTile.val) {
-            slowTile.merge(fastTile);
-            this.score += slowTile.val;
-          }
-
-          slowRow += tileDelta.row;
-          slowCol += tileDelta.col;
-          slowTile = this.matrix[slowRow][slowCol];
-
-          if (
-            slowTile.val !== fastTile.val &&
-            fastTile !== this.matrix[slowRow][slowCol]
-          ) {
-            slowTile.merge(fastTile);
-          }
+          this.score += slowTile.val;
         }
 
-        fastRow += tileDelta.row;
-        fastCol += tileDelta.col;
-      }
+        slowRow += rowDelta;
+        slowCol += colDelta;
+        slowTile = this.matrix[slowRow][slowCol];
 
-      while (this.matrix[slowRow] && this.matrix[slowRow][slowCol]) {
-        const tile: Tile = this.matrix[slowRow][slowCol];
-
-        if (tile.val === null) {
-          this.availableTiles.push(tile);
+        if (slowTile.val !== fastTile.val && fastTile !== slowTile) {
+          slowTile.merge(fastTile);
         }
-
-        slowRow += tileDelta.row;
-        slowCol += tileDelta.col;
       }
 
-      row += tilesDelta.row;
-      col += tilesDelta.col;
+      fastRow += rowDelta;
+      fastCol += colDelta;
+    }
+    return { slowRow, slowCol };
+  }
+
+  findAvailableTiles(
+    { slowRow, slowCol }: { slowRow: number; slowCol: number },
+    { rowDelta, colDelta }: { rowDelta: number; colDelta: number }
+  ) {
+    while (this.matrix[slowRow] && this.matrix[slowRow][slowCol]) {
+      const tile: Tile = this.matrix[slowRow][slowCol];
+
+      if (tile.val === null) {
+        this.availableTiles.push(tile);
+      }
+
+      slowRow += rowDelta;
+      slowCol += colDelta;
     }
   }
 
