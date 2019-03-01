@@ -13,6 +13,15 @@ class Tile {
     this.col = col;
     this.val = null;
   }
+
+  merge(fromTile: Tile): void {
+    if (this.val === null) {
+      this.val = fromTile.val;
+    } else {
+      this.val += fromTile.val;
+    }
+    fromTile.val = null;
+  }
 }
 
 export default Tile;

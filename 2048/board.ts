@@ -1,4 +1,5 @@
 import Tile from './tile';
+import directions from './directions';
 
 class Board {
   matrix: Tile[][];
@@ -17,70 +18,72 @@ class Board {
 
   createMatrix() {
     const rows = new Array(this.height);
+
     this.matrix = rows.map((_, rowIdx) => {
       let row = [];
+
       for (let colIdx = 0; colIdx < this.width; colIdx++) {
         const tile = new Tile(rowIdx, colIdx);
         row.push(tile);
         this.availableTiles.push(tile);
       }
+
       return row;
     });
   }
 
   move(direction: string) {
-    const { startTile, tilesDelta, tileDelta } = this.directions(direction);
+
+    const { startTile, tilesDelta, tileDelta } = directions[direction];
     let { row, col } = startTile;
 
     this.availableTiles = [];
 
     while (this.matrix[row] && this.matrix[row][col]) {
-      let row1 = row;
-      let col1 = col;
-      let row2 = row + tileDelta.row;
-      let col2 = col + tileDelta.col;
+      let slowRow = row;
+      let slowCol = col;
+      let fastRow = row + tileDelta.row;
+      let fastCol = col + tileDelta.col;
 
-      while (this.matrix[row2] && this.matrix[row2][col2]) {
-        const tile1: Tile = this.matrix[row1][col1];
-        const tile2: Tile = this.matrix[row2][col2];
-        if (tile1.val === null && tile2.val) {
-          this.shiftTile(tile1, tile2);
-        } else if (tile1.val && tile2.val) {
-          if(tile1.val === tile2.val) {
-            this.score += this.mergeTiles(row1,col1,row2,col2)
+      while (this.matrix[fastRow] && this.matrix[fastRow][fastCol]) {
+        let slowTile: Tile = this.matrix[slowRow][slowCol];
+        const fastTile: Tile = this.matrix[fastRow][fastCol];
+        if (slowTile.val === null && fastTile.val) {
+          slowTile.merge(fastTile)
+        } else if (slowTile.val && fastTile.val) {
+          
+          if (slowTile.val === fastTile.val) {
+            slowTile.merge(fastTile)
+            this.score += slowTile.val
           }
-          row1 += tileDelta.row;
-          col1 += tileDelta.col;
-          if(tile1.val !== tile2.val && tile2 !== this.matrix[row1][col1]) {
-            this.shiftTile(this.matrix[row1][col1], tile2);
+          
+          slowRow += tileDelta.row;
+          slowCol += tileDelta.col;
+          slowTile = this.matrix[slowRow][slowCol]
+          
+          if (slowTile.val !== fastTile.val && fastTile !== this.matrix[slowRow][slowCol]) {
+            slowTile.merge(fastTile)
           }
         }
-        row2 += tileDelta.row;
-        col2 += tileDelta.col;
+
+        fastRow += tileDelta.row;
+        fastCol += tileDelta.col;
       }
 
-      while (this.matrix[row1] && this.matrix[row1][col1]) {
-        if (this.matrix[row1][col1].val === null) {
-          this.availableTiles.push(this.matrix[row1][col1]);
+      while (this.matrix[slowRow] && this.matrix[slowRow][slowCol]) {
+        const tile: Tile = this.matrix[slowRow][slowCol]
+
+        if (tile.val === null) {
+          this.availableTiles.push(tile);
         }
-        row1 += tileDelta.row;
-        col1 += tileDelta.col;
+
+        slowRow += tileDelta.row;
+        slowCol += tileDelta.col;
       }
 
       row += tilesDelta.row;
       col += tilesDelta.col;
     }
-  }
-
-  mergeTiles(row1: number, col1: number, row2: number, col2: number) {
-    this.matrix[row1][col1].val *= 2;
-    this.matrix[row2][col2].val = null;
-    return this.matrix[row1][col1].val;
-  }
-
-  shiftTile(toTile: Tile, fromTile: Tile): void {
-    toTile.val = fromTile.val;
-    fromTile.val = null;
   }
 
   render() {
@@ -100,35 +103,6 @@ class Board {
     console.log('Adding New Tile');
     // set game over here
     return false;
-  }
-
-  directions(direction) {
-    switch (direction) {
-      case 'right':
-        return {
-          startTile: { row: this.height - 1, col: this.width - 1 },
-          tilesDelta: { row: -1, col: 0 },
-          tileDelta: { row: 0, col: -1 }
-        };
-      case 'down':
-        return {
-          startTile: { row: this.height - 1, col: 0 },
-          tilesDelta: { row: 0, col: 1 },
-          tileDelta: { row: -1, col: 0 }
-        };
-      case 'up':
-        return {
-          startTile: { row: 0, col: this.width - 1 },
-          tilesDelta: { row: 0, col: -1 },
-          tileDelta: { row: 1, col: 0 }
-        };
-      case 'left':
-        return {
-          startTile: { row: 0, col: 0 },
-          tilesDelta: { row: 1, col: 0 },
-          tileDelta: { row: 0, col: 1 }
-        };
-    }
   }
 }
 
