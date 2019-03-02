@@ -32,20 +32,18 @@ class Board {
   move(direction: string) {
     const { startTile, tilesDelta, tileDelta } = directions[direction];
     const { rowsDelta, colsDelta } = tilesDelta;
+    const { rowDelta, colDelta } = tileDelta;
     let { row, col } = startTile;
     this.availableTiles = [];
 
     while (this.matrix[row] && this.matrix[row][col]) {
       let slowPos = { slowRow: row, slowCol: col };
       let fastPos = {
-        fastRow: row + tileDelta.row,
-        fastCol: col + tileDelta.col
+        fastRow: row + rowDelta,
+        fastCol: col + colDelta
       };
-
       slowPos = this.shiftTiles(slowPos, fastPos, tileDelta);
-
       this.findAvailableTiles(slowPos, tileDelta);
-
       row += rowsDelta;
       col += colsDelta;
     }
