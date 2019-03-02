@@ -21,7 +21,7 @@ class Board {
     this.matrix = rows.map((_, rowIdx) => {
       let row = [];
       for (let colIdx = 0; colIdx < this.width; colIdx++) {
-        const tile = new Tile(rowIdx, colIdx);
+        const tile = new Tile();
         row.push(tile);
         this.availableTiles.push(tile);
       }

@@ -2,13 +2,9 @@ import randomNum from './randomNumber';
 
 class Tile {
   val: number;
-  row: number;
-  col: number;
 
-  constructor(row, col) {
-    this.row = row;
-    this.col = col;
-    this.val = null;
+  constructor(val = null) {
+    this.val = val;
   }
 
   merge(fromTile: Tile): void {

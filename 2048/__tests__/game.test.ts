@@ -22,7 +22,9 @@ describe('Game', () => {
   })
 
   describe('#shiftBoard', () => {
-    it('should pass board the direction input by the player')
+    it('should pass board the direction input by the player',()=>{
+      
+    })
   })
 
   describe('#get direction', () => {
