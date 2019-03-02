@@ -20,9 +20,9 @@ class Tile {
 
   random() {
     if (this.val !== null) throw 'Tile already has a number';
-
     const idx: number = randomNum(0, 1);
-    return [2, 4][idx];
+    this.val = [2, 4][idx];
+    return this.val;
   }
 }
 

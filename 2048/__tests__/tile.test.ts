@@ -79,6 +79,46 @@ describe('Tile', () => {
   });
 
   describe('#random', () => {
-    it('should have a #random method', () => {});
+    it('should have a #random method', () => {
+      expect(nullTile.random).toBeDefined();
+      expect(tile1.random).toBeDefined();
+      expect(tile2.random).toBeDefined();
+    });
+
+    let tiles = [];
+
+    beforeEach(() => {
+      for (let i = 0; i < 100; i++) {
+        let tile = new Tile();
+        let result = tile.random();
+        let { val } = tile;
+        tiles.push({ val, result });
+      }
+    });
+
+    it('should assign its val to 2 or 4 when called', () => {
+      let badTiles = tiles.filter(({ val }) => val !== 4 && val !== 2);
+      expect(badTiles).toHaveLength(0);
+    });
+
+    it('should return its val when called', () => {
+      let badTiles = tiles.filter(({ result }) => result !== 4 && result !== 2);
+      expect(badTiles).toHaveLength(0);
+    });
+
+    describe('Errors', () => {
+      let tile: Tile;
+
+      beforeAll(() => {
+        tile = new Tile(16);
+      });
+      it('should throw an error if tile has a val', () => {
+        expect(() => tile.random()).toThrowError();
+      });
+
+      it('should not reassign its val', () => {
+        expect(tile.val).toBe(16);
+      });
+    });
   });
 });
