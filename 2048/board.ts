@@ -8,7 +8,7 @@ class Board {
   score: number;
   availableTiles: any[];
 
-  constructor(height: number, width: number) {
+  constructor(height = 4, width = 4) {
     this.height = height;
     this.width = width;
     this.score = 0;
@@ -17,16 +17,17 @@ class Board {
   }
 
   createMatrix() {
-    const rows = new Array(this.height);
-    this.matrix = rows.map((_, rowIdx) => {
-      let row = [];
+    const matrix: Tile[][] = [];
+    for (let rowIdx = 0; rowIdx < this.height; rowIdx++) {
+      const row: Tile[] = [];
       for (let colIdx = 0; colIdx < this.width; colIdx++) {
         const tile = new Tile();
         row.push(tile);
         this.availableTiles.push(tile);
       }
-      return row;
-    });
+      matrix.push(row);
+    }
+    this.matrix = matrix;
   }
 
   move(direction: string) {
