@@ -10,13 +10,17 @@ class Tile {
   merge(fromTile: Tile): void {
     if (this.val === null) {
       this.val = fromTile.val;
+    } else if (this.val === fromTile.val) {
+      this.val *= 2;
     } else {
-      this.val += fromTile.val;
+      throw 'You can not merge these tiles';
     }
     fromTile.val = null;
   }
 
   random() {
+    if (this.val !== null) throw 'Tile already has a number';
+
     const idx: number = randomNum(0, 1);
     return [2, 4][idx];
   }
