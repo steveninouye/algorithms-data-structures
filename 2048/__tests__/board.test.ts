@@ -39,8 +39,8 @@ describe('Board', () => {
 
     it('should add all tiles to the availalbe tiles array', () => {
       let badTiles: Tile[] = [];
-      let { availableTiles } = smallBoard;
-      smallBoard.matrix.forEach((row) => {
+      let { availableTiles, matrix } = smallBoard;
+      matrix.forEach((row) => {
         row.forEach((tile) => {
           if (availableTiles.indexOf(tile) === -1) {
             badTiles.push(tile);
