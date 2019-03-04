@@ -19,9 +19,30 @@ A solution set is:
 */
 
 const threeSum = (nums: number[]): number[][] => {
-  if(nums.length < 3) return []
-  
-  return [[-1, 0, 1], [-1, -1, 2]];
+  const result = [];
+  if (nums.length < 3) return result;
+  nums.sort((a, b) => a - b);
+  for (let i = 0; i < nums.length - 2; i++) {
+    if (i !== 0 && nums[i] === nums[i - 1]) continue;
+    let difference = 0 - nums[i];
+    let lo = i + 1;
+    let hi = nums.length - 1;
+    while (lo < hi) {
+      let low = nums[lo];
+      let high = nums[hi];
+      let sum = nums[lo] + nums[hi];
+      if (sum === difference) {
+        result.push([nums[i], low, high]);
+        low++;
+        hi--;
+      } else if (sum > difference) {
+        hi--;
+      } else {
+        lo++;
+      }
+    }
+  }
+  return result;
 };
 
 export default threeSum;

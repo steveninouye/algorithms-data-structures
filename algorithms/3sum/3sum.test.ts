@@ -18,9 +18,9 @@ describe('#threeSum', () => {
   });
 
   it('should not contain duplicate triplets', () => {
-    let result = threeSum([-1, 0, 1, 1, 1, 1, 1, 1]);
+    let result = threeSum([-1, -1, -1, 0, 0, 1, 1, 1, 4, 5]);
     expect(result[0].sort((a, b) => a - b)).toEqual([-1, 0, 1]);
-    expect(result).toHaveLength(0);
+    expect(result).toHaveLength(1);
   });
 
   it('should be able to handle duplicatesin the array', () => {
@@ -29,6 +29,7 @@ describe('#threeSum', () => {
     result[0].sort((a, b) => a - b);
     result[1].sort((a, b) => a - b);
     expect(result[0]).toEqual([-2, 1, 1]);
-    expect(result[1]).toContain([-1, 0, 1]);
+    expect(result[1]).toEqual([-1, 0, 1]);
+    expect(result).toHaveLength(2);
   });
 });
