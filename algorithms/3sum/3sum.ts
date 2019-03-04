@@ -27,18 +27,21 @@ const threeSum = (nums: number[]): number[][] => {
     let difference = 0 - nums[i];
     let lo = i + 1;
     let hi = nums.length - 1;
+    let set = {};
     while (lo < hi) {
       let low = nums[lo];
       let high = nums[hi];
       let sum = nums[lo] + nums[hi];
-      if (sum === difference) {
+      if (set[low] || sum < difference) {
+        lo++;
+      } else if (set[high] || sum > difference) {
+        hi--;
+      } else {
+        set[low] = true;
+        set[high] = true;
         result.push([nums[i], low, high]);
         low++;
         hi--;
-      } else if (sum > difference) {
-        hi--;
-      } else {
-        lo++;
       }
     }
   }
