@@ -9,14 +9,14 @@ describe('#isPalindrome', () => {
   });
 
   it('should return true if string is a palindrome', () => {
-    expect(isPalindrome('racecar')).toBe(true);
-    expect(isPalindrome('lkracecarkl')).toBe(true);
-    expect(isPalindrome('hhhhhhh')).toBe(true);
+    expect(isPalindrome('racecar', 0, 6)).toBe(true);
+    expect(isPalindrome('lkracecarkldfghg', 0, 10)).toBe(true);
+    expect(isPalindrome('hhhhhhh', 0, 6)).toBe(true);
   });
 
   it('should return false if string is not a palindrome', () => {
-    expect(isPalindrome('djkgfbsd')).toBe(false);
-    expect(isPalindrome('rt')).toBe(false);
+    expect(isPalindrome('djkgfbsd', 0, 7)).toBe(false);
+    expect(isPalindrome('rt', 0, 1)).toBe(false);
   });
 });
 
