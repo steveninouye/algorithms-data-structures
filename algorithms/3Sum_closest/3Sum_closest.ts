@@ -9,8 +9,6 @@ Given array nums = [-1, 2, 1, -4], and target = 1.
 The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
 */
 
-const threeSumClosest = (nums: number[], target: number): number => {
+export const threeSumClosest = (nums: number[], target: number): number => {
   return 1;
 };
-
-export default { threeSumClosest };
