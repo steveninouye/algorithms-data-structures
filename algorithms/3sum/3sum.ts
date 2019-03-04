@@ -19,6 +19,8 @@ A solution set is:
 */
 
 const threeSum = (nums: number[]): number[][] => {
+  if(nums.length < 3) return []
+  
   return [[-1, 0, 1], [-1, -1, 2]];
 };
 
