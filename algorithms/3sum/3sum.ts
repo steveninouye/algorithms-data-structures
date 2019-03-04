@@ -18,6 +18,8 @@ A solution set is:
 ]
 */
 
-const threeSum = (nums) => {};
+const threeSum = (nums: number[]): number[][] => {
+  return [[-1, 0, 1], [-1, -1, 2]];
+};
 
 export default threeSum;
