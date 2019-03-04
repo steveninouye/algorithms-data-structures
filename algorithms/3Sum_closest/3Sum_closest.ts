@@ -11,6 +11,7 @@ The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
 
 export const threeSumClosest = (nums: number[], target: number): number => {
   if(nums.length < 3) return null;
+  nums.sort((a,b) => a - b)
   
   return 1;
 };
