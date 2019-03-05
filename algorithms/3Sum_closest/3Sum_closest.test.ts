@@ -12,7 +12,7 @@ describe('#threeSumClosest', () => {
   it('should return the closest sum', () => {
     expect(threeSumClosest([-1, 2, 1, -4], 1)).toBe(2);
     expect(threeSumClosest([-1, 2, 1, -4], 2)).toBe(2);
-    expect(threeSumClosest([-1, 2, 1, -4], 0)).toBe(0);
+    expect(threeSumClosest([-1, 2, 1, -4], 0)).toBe(-1);
   });
 
   it('should return null if there are less than 3 numbers in the array', () => {
