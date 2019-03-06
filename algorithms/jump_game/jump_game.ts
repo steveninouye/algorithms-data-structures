@@ -19,6 +19,13 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum
 jump length is 0, which makes it impossible to reach the last index.
 */
 
-export const canJump = (nums) => {
-
+export const canJump = (nums: number[]):boolean => {
+  let max = 0;
+  for(var i = 0; i < nums.length; i++) {
+    if(max < i) {
+      return false
+    }
+    max = Math.max(max, (i + nums[i]))
+  }
+  return true
 };
