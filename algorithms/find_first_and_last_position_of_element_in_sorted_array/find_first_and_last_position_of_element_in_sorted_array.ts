@@ -17,7 +17,38 @@ Output: [-1,-1]
 */
 
 const searchRange = (nums: number[], target: number): number[] => {
-  return [3, 4];
+  if (nums.length === 1 && nums[0] === target) return [0, 0];
+  if (nums.length <= 1) return [-1, -1];
+  let midPt = Math.floor((nums.length - 1) / 2);
+  let num = nums[midPt];
+  if (num === target) {
+    let left = searchRange(nums.slice(0, midPt), target);
+    let right = searchRange(nums.slice(midPt + 1), target);
+    if(right[0] === -1 && left[0] === -1){
+      return [-1, -1]
+    } else if (right[0] === -1 && left[0] > -1) {
+      left[1] = midPt
+      return left;
+    } else if (left[0] === -1 && right[0] > -1) {
+      right[0] += midPt + 1
+      right[1] += midPt + 1
+      return right;
+    } else {
+      left[1] = midPt + 1 + right[1]
+      return left;
+    }
+  } else if (num < target) {
+    let right = searchRange(nums.slice(midPt + 1), target);
+    if (right[0] === -1) {
+      return right;
+    } else {
+      right[0] += midPt + 1
+      right[1] += midPt + 1
+      return right;
+    }
+  } else {
+    return searchRange(nums.slice(0, midPt), target);
+  }
 };
 
 console.log(searchRange([5, 7, 7, 8, 8, 10], 8));
