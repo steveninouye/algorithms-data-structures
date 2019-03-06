@@ -26,6 +26,22 @@ Output: "1211"
 */
 
 export const countAndSay = (n:number):string => {
-
-  return "1211"
+  if(n === 1) return "1"
+  const prev = countAndSay(n - 1)
+  let count = 1;
+  let result = ""
+  let ltr = prev[0]
+  for(var i = 1; i < prev.length; i++){
+    if(prev[i] === ltr){
+      count++
+    } else {
+      result += count.toString();
+      result += ltr;
+      ltr = prev[i]
+      count = 1
+    }
+  }
+  result += count.toString();
+  result += ltr;
+  return result
 };
