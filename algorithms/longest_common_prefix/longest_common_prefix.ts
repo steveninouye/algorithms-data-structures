@@ -21,6 +21,13 @@ All given inputs are in lowercase letters a-z.
 
 export const longestCommonPrefix = (strs: string[]):string=> {
   let result = ""
-
+  if(strs.length === 0) return result
+  for(var strIdx = 0; strIdx < strs[0].length; strIdx++) {
+    let ltr = strs[0][strIdx]
+    for(var strsIdx = 1; strsIdx < strs.length; strsIdx++) {
+      if(strs[strsIdx][strIdx] !== ltr) return result;
+    }
+    result += ltr;
+  }
   return result
 };
