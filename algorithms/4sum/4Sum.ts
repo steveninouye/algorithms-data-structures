@@ -23,7 +23,6 @@ export const fourSum = (nums: number[], target: number): number[][] => {
   const len = nums.length;
   if (len < 4) return result;
   nums.sort((a, b) => a - b);
-  console.log('nums: ', nums);
   for (var i = 0; i < len - 3; i++) {
     if (i !== 0 && nums[i] === nums[i - 1]) continue;
     const num1 = nums[i];
@@ -34,12 +33,8 @@ export const fourSum = (nums: number[], target: number): number[][] => {
       let lo = j + 1;
       let hi = len - 1;
       while (lo < hi) {
-        console.log('lo: ', lo);
-        console.log('hi: ', hi);
         const sum = nums[lo] + nums[hi];
-        console.log('sum: ', sum);
         const total = num1 + num2 + sum;
-        console.log('total: ', total);
         if (total === target) {
           result.push([num1, num2, nums[lo], nums[hi]]);
           hi--;
