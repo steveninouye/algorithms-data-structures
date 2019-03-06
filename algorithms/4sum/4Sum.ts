@@ -23,20 +23,34 @@ export const fourSum = (nums: number[], target: number): number[][] => {
   const len = nums.length;
   if (len < 4) return result;
   nums.sort((a, b) => a - b);
+  console.log('nums: ', nums);
   for (var i = 0; i < len - 3; i++) {
     if (i !== 0 && nums[i] === nums[i - 1]) continue;
     const num1 = nums[i];
     for (var j = i + 1; j < len - 2; j++) {
       const num2 = nums[j];
-      if (num1 + num2 * 3 > 0) break;
+      if (j !== i + 1 && nums[j - 1] === num2) continue;
+      if (num1 + num2 * 3 > target) break;
       let lo = j + 1;
       let hi = len - 1;
       while (lo < hi) {
+        console.log('lo: ', lo);
+        console.log('hi: ', hi);
         const sum = nums[lo] + nums[hi];
+        console.log('sum: ', sum);
         const total = num1 + num2 + sum;
-        if (total === 0) {
+        console.log('total: ', total);
+        if (total === target) {
           result.push([num1, num2, nums[lo], nums[hi]]);
-        } else if (total > 0) {
+          hi--;
+          while (nums[hi] === nums[hi + 1]) {
+            hi--;
+          }
+          lo++;
+          while (nums[lo] === nums[lo - 1]) {
+            lo++;
+          }
+        } else if (total > target) {
           hi--;
         } else {
           lo++;
