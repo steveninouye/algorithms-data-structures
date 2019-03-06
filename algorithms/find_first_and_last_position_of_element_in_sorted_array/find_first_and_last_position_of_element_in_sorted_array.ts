@@ -16,66 +16,38 @@ Input: nums = [5,7,7,8,8,10], target = 6
 Output: [-1,-1]
 */
 
-const searchLeft = (nums: number[], target: number): number => {
-  if (nums.length === 1 && nums[0] === target) return 0;
-  if (nums.length <= 1) return -1;
-  let midPt = Math.floor((nums.length - 1) / 2);
-  let num = nums[midPt];
-  if (num < target) {
-    let right = searchLeft(nums.slice(midPt + 1), target);
-    return right === -1 ? -1 : right + midPt + 1;
-  } else {
-    let left = searchLeft(nums.slice(0, midPt), target);
-    if (left > -1) {
-      return left;
-    } else if (num === target) {
-      return midPt;
-    } else {
-      return -1;
-    }
-  }
-};
-
-const searchRight = (nums: number[], target: number): number => {
-  if (nums.length === 1 && nums[0] === target) return 0;
-  if (nums.length <= 1) return -1;
-  let midPt = Math.floor((nums.length - 1) / 2);
-  let num = nums[midPt];
-  if (num > target) {
-    let left = searchRight(nums.slice(0, midPt), target);
-    return left === -1 ? -1 : left;
-  } else {
-    let right = searchRight(nums.slice(midPt + 1), target);
-    if (right > -1) {
-      return right + midPt + 1;
-    } else if (num === target) {
-      return midPt;
-    } else {
-      return -1;
-    }
-  }
-};
-
 const searchRange = (nums: number[], target: number): number[] => {
-  if (nums.length === 1 && nums[0] === target) return [0, 0];
-  if (nums.length <= 1) return [-1, -1];
-  let midPt = Math.floor((nums.length - 1) / 2);
-  let num = nums[midPt];
-  if (num === target) {
-    let left = searchLeft(nums.slice(0, midPt), target);
-    let right = searchRight(nums.slice(midPt + 1), target);
-  } else if (num < target) {
-    let right = searchRange(nums.slice(midPt + 1), target);
-    if (right[0] === -1) {
-      return right;
+  let left = 0;
+  let right = nums.length - 1;
+  let rightStart;
+  while (right - left > 1) {
+    let midPt = Math.floor((right - left) / 2) + left;
+    if(nums[midPt] === target) {
+      if(rightStart !== undefined) rightStart = midPt
+      right = midPt
+    } else if (nums[midPt] < target) {
+      left = midPt + 1
     } else {
-      right[0] += midPt + 1;
-      right[1] += midPt + 1;
-      return right;
+      right = midPt - 1
     }
-  } else {
-    return searchRange(nums.slice(0, midPt), target);
   }
+  if (nums[right] !== target) return [-1, -1];
+  if (!rightStart) return [right, right];
+  const result = [right];
+  left = rightStart;
+  right = nums.length - 1;
+  while (right - left > 1) {
+    let midPt = Math.floor((right - left) / 2) + left;
+    if(nums[midPt] === target) {
+      left = midPt
+    } else if (nums[midPt] > target) {
+      right = midPt - 1
+    } else {
+      left = midPt + 1
+    }
+  }
+  result[1] = left;
+  return result;
 };
 
 console.log(searchRange([5, 7, 7, 8, 8, 10], 8));
