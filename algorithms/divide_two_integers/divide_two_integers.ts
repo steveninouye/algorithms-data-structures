@@ -20,24 +20,4 @@ Both dividend and divisor will be 32-bit signed integers.
 The divisor will never be 0.
 Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−231,  231 − 1]. For the purpose of this problem, assume that your function returns 231 − 1 when the division result overflows.
 */
-var divide = function(dividend, divisor) {
-  if (dividend === 0) return 0;
-  let isPositive =
-    (dividend >= 0 && divisor > 0) || (dividend <= 0 && divisor < 0);
-  dividend = Math.abs(dividend);
-  divisor = Math.abs(divisor);
-  let result = 0;
-  while (dividend >= divisor) {
-    dividend -= divisor;
-    if (result === 2147483647 && isPositive) {
-      result = 2147483647;
-      break;
-    }
-    if (result === 2147483648 && !isPositive) {
-      result = 2147483648;
-      break;
-    }
-    result++;
-  }
-  return isPositive ? result : -result;
-};
+export const divide = (dividend: number, divisor: number): number => {};
