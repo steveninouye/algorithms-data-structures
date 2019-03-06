@@ -19,14 +19,20 @@ What should we return when needle is an empty string? This is a great question t
 For the purpose of this problem, we will return 0 when needle is an empty string. This is consistent to C's strstr() and Java's indexOf().
 */
 
-var strStr = (haystack, needle) => {
-  if (needle.length === 0) return 0;
-  let needleStart = needle[0];
-  let sliceSz = needle.length;
-  for (let i = 0; i < haystack.length; i++) {
-    if (haystack[i] === needleStart && haystack.slice(i, i + sliceSz) === needle) {
-      return i;
+export const strStr = (haystack:string, needle:string):number => {
+  const haystackLen = haystack.length;
+  const needleLen = needle.length;
+  for(var i = 0; i <= haystackLen - needleLen; i++) {
+    if(haystack[i] === needle[0]){
+      let isNeedleFound = true
+      for(var j = 1; j < needleLen; j++) {
+        if(haystack[i + j] !== needle[j]){
+          isNeedleFound = false
+          break
+        }
+      }
+      if(isNeedleFound) return i;
     }
   }
-  return -1;
+  return -1
 };
