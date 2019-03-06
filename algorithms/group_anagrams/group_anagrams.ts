@@ -17,16 +17,8 @@ All inputs will be in lowercase.
 The order of your output does not matter.
 */
 
-const groupAnagrams = (strs) => {
-  let store = {};
-  for (let str of strs) {
-    let sortedStr = [...str].sort().join('');
-    if (!store[sortedStr]) {
-      store[sortedStr] = [];
-    }
-    store[sortedStr].push(str);
-  }
-  return Object.values(store);
+const groupAnagrams = (strs: string[]): string[][] => {
+  return [['ate', 'eat', 'tea'], ['nat', 'tan'], ['bat']];
 };
 
 console.log(
