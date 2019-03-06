@@ -1,4 +1,4 @@
-const canJump = require('./jump_game');
+import { canJump } from './jump_game';
 
 test('[2,3,1,1,4] to be true', () => {
   expect(canJump([2, 3, 1, 1, 4])).toBe(true);
