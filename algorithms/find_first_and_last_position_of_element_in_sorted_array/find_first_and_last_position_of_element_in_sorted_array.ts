@@ -1,4 +1,7 @@
 /*
+MUST DO AGAIN!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
 https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
 Given an array of integers nums sorted in ascending order, find the starting and ending position of a given target value.
 
@@ -19,31 +22,23 @@ Output: [-1,-1]
 const searchRange = (nums: number[], target: number): number[] => {
   let left = 0;
   let right = nums.length - 1;
-  let rightStart;
-  while (right - left > 1) {
-    let midPt = Math.floor((right - left) / 2) + left;
-    if(nums[midPt] === target) {
-      if(rightStart !== undefined) rightStart = midPt
-      right = midPt
-    } else if (nums[midPt] < target) {
-      left = midPt + 1
+  while (left < right) {
+    let midPt = Math.floor((left + right) / 2);
+    if (nums[midPt] < target) {
+      left = midPt + 1;
     } else {
-      right = midPt - 1
+      right = midPt;
     }
   }
-  if (nums[right] !== target) return [-1, -1];
-  if (!rightStart) return [right, right];
-  const result = [right];
-  left = rightStart;
+  if (nums[left] !== target) return [-1, -1];
+  const result = [left];
   right = nums.length - 1;
-  while (right - left > 1) {
-    let midPt = Math.floor((right - left) / 2) + left;
-    if(nums[midPt] === target) {
-      left = midPt
-    } else if (nums[midPt] > target) {
-      right = midPt - 1
+  while (left < right) {
+    let midPt = Math.floor((left + right) / 2 + 1);
+    if (nums[midPt] > target) {
+      right = midPt - 1;
     } else {
-      left = midPt + 1
+      left = midPt;
     }
   }
   result[1] = left;
