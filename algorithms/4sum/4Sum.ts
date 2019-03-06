@@ -19,6 +19,8 @@ A solution set is:
 */
 
 export const fourSum = (nums: number[], target: number): number[][] => {
+  const result:number[][] = []
+  if(nums.length < 4) return result
   
-  return [[1]];
+  return result;
 };
