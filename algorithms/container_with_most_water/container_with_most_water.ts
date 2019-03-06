@@ -14,5 +14,18 @@ Output: 49
 */
 
 const maxArea = (arr: number[]): number => {
-  return 49;
+  let lo = 0;
+  let hi = arr.length - 1;
+  let max = 0;
+  while (lo < hi) {
+    const min = Math.min(arr[lo], arr[hi]);
+    const area = min * (hi - lo);
+    if (area > max) max = area;
+    if (min === arr[lo]) {
+      lo++;
+    } else {
+      hi--;
+    }
+  }
+  return max;
 };
