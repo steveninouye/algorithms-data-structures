@@ -12,15 +12,6 @@ Follow up:
 If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
 */
 
-const maxSubArray = (nums) => {
-  let max = nums[0];
-  let total = 0;
-  for (let i = 0; i < nums.length; i++) {
-    total += nums[i];
-    if (total > max) max = total;
-    if (total < 0) total = 0;
-  }
-  return max;
-};
+export const maxSubArray = (nums: number[]): number => {
 
-module.exports = maxSubArray;
+};
