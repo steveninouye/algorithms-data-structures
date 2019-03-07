@@ -20,66 +20,14 @@ nums2 = [3, 4]
 The median is (2 + 3)/2 = 2.5
 */
 
-const findMedianSortedArrays = (nums1: number[], nums2: number[]) => {
-  let len1 = nums1.length;
-  let len2 = nums2.length;
-  let totalLength = len1 + len2;
-  let [short, shortLen, long, longLen] =
-    len1 < len2 ? [nums1, len1, nums2, len2] : [nums2, len2, nums1, len1];
-  if (longLen === 0 || shortLen === 0) {
-    return shortLen === 0 ? long : short;
-  } else if (short[shortLen - 1] <= long[0] || short[0] >= long[longLen - 1]) {
-    let idx = Math.floor((totalLength - 1) / 2);
-    if (short[shortLen - 1] <= long[0]) {
-      idx -= shortLen;
-    }
-    if (totalLength % 2 === 1) {
-      return long[idx];
-    } else if (idx === -1) {
-      return (long[0] + short[shortLen - 1]) / 2;
-    } else if (idx === shortLen - 1) {
-      return (short[0] + long[longLen - 1]) / 2;
-    } else {
-      return (long[idx] + long[idx + 1]) / 2;
-    }
-  } else {
-    let start = 0;
-    let end = shortLen - 1;
-    let shortIdx = findMidIdx(start, end);
-    let longIdx = getLongIdx(totalLength, shortIdx);
-    let max = Math.max(
-      short[shortIdx] || -Infinity,
-      long[longIdx] || -Infinity
-    );
-    let min = Math.min(
-      short[shortIdx + 1] || Infinity,
-      long[longIdx + 1] || Infinity
-    );
-    while (max > min) {
-      if (short[shortIdx] > long[longIdx + 1]) {
-        end = shortIdx - 1;
-      } else {
-        start = shortIdx + 1;
-      }
-      shortIdx = findMidIdx(start, end);
-      longIdx = getLongIdx(totalLength, shortIdx);
-      max = Math.max(short[shortIdx] || -Infinity, long[longIdx] || -Infinity);
-      min = Math.min(
-        short[shortIdx + 1] || Infinity,
-        long[longIdx + 1] || Infinity
-      );
-    }
-    if (totalLength % 2 === 1) {
-      return max;
-    } else {
-      return (max + min) / 2;
-    }
-  }
+export const findMedianSortedArrays = (nums1: number[], nums2: number[]) => {
+  /*
+   * make sure that the length of left(nums1) + left(nums2) === right(nums1) + right(nums2)
+   * possible difference of 1
+   */
 };
 
-const findMidIdx = (start, end) => Math.floor((end - start) / 2) + start;
+// const findMidIdx = (start, end) => Math.floor((end - start) / 2) + start;
 
-const getLongIdx = (totalLength, shortIdx) =>
-  Math.ceil(totalLength / 2) - shortIdx - 2;
-
-export default findMedianSortedArrays;
+// const getLongIdx = (totalLength, shortIdx) =>
+//   Math.ceil(totalLength / 2) - shortIdx - 2;

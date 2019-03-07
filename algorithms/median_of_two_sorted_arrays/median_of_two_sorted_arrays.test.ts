@@ -1,4 +1,4 @@
-import findMedianSortedArrays from './median_of_two_sorted_arrays';
+import { findMedianSortedArrays } from './median_of_two_sorted_arrays';
 
 describe('#findMedianSortedArrays', () => {
   it('should return the element in the middle of an odd amount of elements', () => {
