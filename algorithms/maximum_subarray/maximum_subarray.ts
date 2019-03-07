@@ -13,5 +13,23 @@ If you have figured out the O(n) solution, try coding another solution using the
 */
 
 export const maxSubArray = (nums: number[]): number => {
-
+  /**
+   * Create variable to hold maximum sum (starts at negative Infinity)
+   * create varible that will hold the sum
+   *
+   * while iterating over the array
+   *  if sum is less than 0 return value to 0
+   *  add value to variable holding sum
+   *
+   *  check if variable is greater than the maximum sum
+   *  if it is greater reassign maximum sum to new sum
+   */
+  let max = -Infinity;
+  let sum = 0;
+  for (var num of nums) {
+    sum += num;
+    if (sum > max) max = sum;
+    if (sum < 0) sum = 0;
+  }
+  return max;
 };
