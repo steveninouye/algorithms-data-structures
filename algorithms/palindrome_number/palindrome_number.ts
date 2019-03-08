@@ -22,13 +22,14 @@ Follow up:
 Coud you solve it without converting the integer to a string?
 */
 
-const isPalindrome = (x) => {
+export const isPalindrome = (x: number): boolean => {
   if (x < 0) return false;
-  let reverse = 0;
   let num = x;
+  let reversed = 0;
   while (num > 0) {
-    reverse = reverse * 10 + (num % 10);
-    num = (num / 10) | 0;
+    reversed *= 10;
+    reversed += num % 10;
+    num = Math.floor(num / 10);
   }
-  return reverse === x;
+  return x === reversed;
 };
