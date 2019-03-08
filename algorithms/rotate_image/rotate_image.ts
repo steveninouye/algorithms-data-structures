@@ -1,4 +1,5 @@
 /*
+MUST DO AGAIN!!!!!!!!!!!!!!!!!!!!!
 https://leetcode.com/problems/rotate-image/
 You are given an n x n 2D matrix representing an image.
 
@@ -42,19 +43,23 @@ rotate the input matrix in-place such that it becomes:
 ]
 */
 
-const rotate = (matrix) => {
-  let len = matrix.length - 1;
-  let maxRow = (matrix.length / 2) | 0;
-  for (let rowNum = 0; rowNum < maxRow; rowNum++) {
-    for (let colNum = rowNum; colNum < len - rowNum; colNum++) {
-      let topLeft = matrix[rowNum][colNum];
-      let topRight = matrix[colNum][len - rowNum];
-      let bottomRight = matrix[len - rowNum][len - colNum];
-      let bottomLeft = matrix[len - colNum][rowNum];
-      matrix[rowNum][colNum] = bottomLeft;
-      matrix[colNum][len - rowNum] = topLeft;
-      matrix[len - rowNum][len - colNum] = topRight;
-      matrix[len - colNum][rowNum] = bottomRight;
+const rotate = (matrix: number[][]): number[][] => {
+  const lastRow = Math.floor(matrix.length / 2);
+  for (var rowIdx = 0; rowIdx <= lastRow; rowIdx++) {
+    const lastCol = matrix[0].length - 1 - rowIdx;
+    for (var colIdx = rowIdx; colIdx < lastCol; colIdx++) {
+      const oppositeRowIdx = matrix.length - rowIdx - 1;
+      const oppositeColIdx = matrix.length - colIdx - 1;
+
+      const topLeft = matrix[rowIdx][colIdx];
+      const topRight = matrix[colIdx][oppositeRowIdx];
+      const bottomRight = matrix[oppositeRowIdx][oppositeColIdx];
+      const bottomLeft = matrix[oppositeColIdx][rowIdx];
+
+      matrix[rowIdx][colIdx] = bottomLeft;
+      matrix[colIdx][oppositeRowIdx] = topLeft;
+      matrix[oppositeRowIdx][oppositeColIdx] = topRight;
+      matrix[oppositeColIdx][rowIdx] = bottomRight;
     }
   }
   return matrix;
