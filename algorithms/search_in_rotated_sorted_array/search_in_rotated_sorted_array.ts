@@ -21,28 +21,25 @@ Input: nums = [4,5,6,7,0,1,2], target = 3
 Output: -1
 */
 
-const search = (nums, target) => {
-  let len = nums.length;
-  if (len === 0 || (len === 1 && nums[0] !== target)) return -1;
-  let midIdx = ((len - 1) / 2) | 0;
-  let midEl = nums[midIdx];
-  if (midEl === target) return midIdx;
-  let firstEl = nums[0];
-  if (firstEl === target) return 0;
-  if (
-    (firstEl < target && midEl > target) ||
-    (midEl < firstEl && (midEl > target || firstEl < target))
-  ) {
-    return search(nums.slice(0, midIdx), target);
-  } else {
-
-    let result = search(nums.slice(midIdx + 1), target);
-    if (result === -1) {
-      return -1;
+export const search = (nums: number[], target: number): number => {
+  let lo = 0;
+  let hi = nums.length - 1;
+  while (lo <= hi) {
+    let midPt = Math.floor((hi + lo) / 2);
+    if (nums[midPt] === target) {
+      return midPt;
+    } 
+    const isRightSorted = nums[midPt] < nums[hi]
+    if((nums[midPt] < target && nums[hi] >= target && isRightSorted)||
+      (nums[midPt] > target && nums[lo] > target && !isRightSorted) ||
+      (nums[lo] < target && nums[midPt] < target && !isRightSorted)
+    ){
+      lo = midPt + 1
     } else {
-      return midIdx + 1 + result;
+      hi = midPt - 1
     }
   }
+  return -1;
 };
 
 console.log(search([4, 5, 6, 7, 0, 1, 2], 0));
