@@ -20,6 +20,24 @@ nums2 = [3, 4]
 The median is (2 + 3)/2 = 2.5
 */
 
+const average = (num1: number, num2: number) => (num1 + num2) / 2;
+
+// get median of array
+const arrayMedian = (arr: number[]): number => {
+  let idx = getLeftMidPt(arr.length);
+  if (arr.length % 2 === 1) {
+    return arr[idx];
+  } else {
+    return (arr[idx] + arr[idx + 1]) / 2;
+  }
+};
+
+// mid point with left bias
+const getLeftMidPt = (length: number): number => Math.floor((length - 1) / 2);
+
+// mid point with right bias
+const getRightMidPt = (length: number): number => Math.floor(length / 2);
+
 export const findMedianSortedArrays = (nums1: number[], nums2: number[]) => {
   /*
    * constraints:
@@ -36,12 +54,24 @@ export const findMedianSortedArrays = (nums1: number[], nums2: number[]) => {
     nums1.length > nums2.length
       ? [nums2, nums2.length, nums1, nums1.length]
       : [nums1, nums1.length, nums2, nums2.length];
+  const totalLength = shortLen + longLen;
+  let combinedMidPt = getLeftMidPt(totalLength);
   if (shortLen === 0) {
     return arrayMedian(long);
-  } else if (short[0] > long[longLen - 1] || long[0] > short[shortLen - 1]) {
-    
+  } else if (short[0] >= long[longLen - 1]) {
+    return totalLength % 2 === 1
+      ? long[combinedMidPt]
+      : (long[combinedMidPt] + long[combinedMidPt + 1]) / 2;
+  } else if (long[0] >= short[shortLen - 1]) {
+    const idx = combinedMidPt - shortLen;
+    if (totalLength % 2 === 1) {
+      return long[idx];
+    } else {
+      return idx < 0
+        ? average(long[0], short[shortLen - 1])
+        : average(long[idx], long[idx + 1]);
+    }
   } else {
-    let combinedMidPt = getLeftMidPt(shortLen + longLen);
     let shortMidPt = getLeftMidPt(shortLen);
     let longMidPt = combinedMidPt - shortMidPt - 1;
     let leftMax = Math.max(short[shortMidPt], long[longMidPt]);
@@ -64,31 +94,24 @@ export const findMedianSortedArrays = (nums1: number[], nums2: number[]) => {
         long[longMidPt + 1] || Infinity
       );
     }
-    if (combinedMidPt % 2 === 1) {
-      return Math.min(short[shortMidPt + 1], long[longMidPt + 1]);
+    if (totalLength % 2 === 1) {
+      return Math.min(
+        short[shortMidPt + 1] || Infinity,
+        long[longMidPt + 1] || Infinity
+      );
     } else {
-      let max = Math.max(short[shortMidPt], long[longMidPt]);
-      let min = Math.min(short[shortMidPt + 1], long[longMidPt + 1]);
+      let max = Math.max(
+        short[shortMidPt] || -Infinity,
+        long[longMidPt] || -Infinity
+      );
+      let min = Math.min(
+        short[shortMidPt + 1] || Infinity,
+        long[longMidPt + 1] || Infinity
+      );
       return (max + min) / 2;
     }
   }
 };
-
-// get median of array
-const arrayMedian = (arr: number[]): number => {
-  let idx = getLeftMidPt(arr.length);
-  if (arr.length % 2 === 1) {
-    return arr[idx];
-  } else {
-    return (arr[idx] + arr[idx + 1]) / 2;
-  }
-};
-
-// mid point with left bias
-const getLeftMidPt = (length: number): number => Math.floor((length - 1) / 2);
-
-// mid point with right bias
-const getRightMidPt = (length: number): number => Math.floor(length / 2);
 
 // const findMidIdx = (start, end) => Math.floor((end - start) / 2) + start;
 
