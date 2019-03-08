@@ -16,23 +16,22 @@ Output:
 ]
 */
 
-const permute = (nums) => {
-  if (nums.length === 0) return [];
-  let permutations = [[nums[0]]];
-  for (let i = 1; i < nums.length; i++) {
-    let num = nums[i];
-    let newPermutations = [];
-    for (let j = 0; j < permutations.length; j++) {
-      let permutation = permutations[j];
-      for (let k = 0; k <= permutation.length; k++) {
-        let copy = permutation.slice();
-        copy.splice(k, 0, num);
-        newPermutations.push(copy);
+const permute = (nums: number[]): number[][] => {
+  let results: number[][] = [[]];
+  for (var numIdx = 0; numIdx < nums.length; numIdx++) {
+    const num: number = nums[numIdx];
+    const newResults: number[][] = [];
+    for (var resultsIdx = 0; resultsIdx < results.length; resultsIdx++) {
+      let result: number[] = results[resultsIdx];
+      for (var resultIdx = 0; resultIdx <= result.length; resultIdx++) {
+        let dup = result.slice();
+        dup.splice(resultIdx, 0, num);
+        newResults.push(dup);
       }
     }
-    permutations = newPermutations;
+    results = newResults;
   }
-  return permutations;
+  return results;
 };
 
 let example = permute([1, 2, 3]);
