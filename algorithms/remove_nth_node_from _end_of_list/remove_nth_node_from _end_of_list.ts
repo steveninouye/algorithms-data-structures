@@ -1,3 +1,4 @@
+import { SinglyLinkNode as ListNode } from '../../data_structures/nodes/nodes';
 /*
 https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 Given a linked list, remove the n-th node from the end of list and return its head.
@@ -16,19 +17,19 @@ Follow up:
 Could you do this in one pass?
 */
 
-const removeNthFromEnd = (head, n) => {
+const removeNthFromEnd = (head: ListNode, n: number): ListNode => {
   let dummy = new ListNode(0);
   dummy.next = head;
-  let node1 = head;
-  while (n > 1) {
+  let fastNode = dummy;
+  while (n > 0) {
+    fastNode = fastNode.next;
     n--;
-    node1 = node1.next;
   }
-  let node2 = dummy;
-  while (node1.next) {
-    node1 = node1.next;
-    node2 = node2.next;
+  let slowNode = dummy;
+  while (fastNode.next) {
+    slowNode = slowNode.next;
+    fastNode = fastNode.next;
   }
-  node2.next = node2.next.next;
+  slowNode.next = slowNode.next.next;
   return dummy.next;
 };
