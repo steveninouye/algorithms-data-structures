@@ -36,13 +36,13 @@ for (int i = 0; i < len; i++) {
 }
 */
 
-const removeDuplicates = (nums) => {
-  let swappingIdx = 1;
-  for (let i = 1; i < nums.length; i++) {
-    if (nums[i] !== nums[i - 1]) {
-      nums[swappingIdx] = nums[i];
-      swappingIdx++;
+export const removeDuplicates = (nums: number[]): number => {
+  let slowIdx = 0;
+  for (var fastIdx = 1; fastIdx < nums.length; fastIdx++) {
+    if (nums[fastIdx] !== nums[slowIdx]) {
+      slowIdx++;
+      nums[slowIdx] = nums[fastIdx];
     }
   }
-  return swappingIdx;
+  return slowIdx + 1;
 };
