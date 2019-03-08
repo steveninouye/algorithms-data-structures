@@ -39,76 +39,33 @@ const getLeftMidPt = (length: number): number => Math.floor((length - 1) / 2);
 const getRightMidPt = (length: number): number => Math.floor(length / 2);
 
 export const findMedianSortedArrays = (nums1: number[], nums2: number[]) => {
-  /*
-   * constraints:
-   * make sure that the length of left(nums1) + left(nums2) === right(nums1) + right(nums2)
-   * possible difference of 1
-   * MAX of BOTH left arrays needs to be less than MIN of both right arrays
-   * find the middle number
-   * if there are 2 middle numbers (length is even) then average of the 2 middle numbers
-   *
-   * Let's start with doing a binary search on the short array to find out where to cut
-   *
-   */
   const [short, shortLen, long, longLen] =
     nums1.length > nums2.length
       ? [nums2, nums2.length, nums1, nums1.length]
       : [nums1, nums1.length, nums2, nums2.length];
   const totalLength = shortLen + longLen;
-  let combinedMidPt = getLeftMidPt(totalLength);
-  if (shortLen === 0) {
-    return arrayMedian(long);
-  } else if (short[0] >= long[longLen - 1]) {
-    return totalLength % 2 === 1
-      ? long[combinedMidPt]
-      : (long[combinedMidPt] + long[combinedMidPt + 1]) / 2;
-  } else if (long[0] >= short[shortLen - 1]) {
-    const idx = combinedMidPt - shortLen;
-    if (totalLength % 2 === 1) {
-      return long[idx];
+  let minIdx = 0;
+  let maxIdx = shortLen;
+  const midPt = Math.floor((longLen + shortLen + 1) / 2);
+  while (minIdx <= maxIdx) {
+    let shortPartition = Math.floor((maxIdx + minIdx) / 2);
+    let longPartition = midPt - shortPartition;
+    if (shortPartition > 0 && short[shortPartition - 1] > long[longPartition]) {
+      maxIdx = shortPartition - 1;
+    } else if (
+      shortPartition < shortLen &&
+      short[shortPartition] < long[longPartition - 1]
+    ) {
+      minIdx = shortPartition + 1;
     } else {
-      return idx < 0
-        ? average(long[0], short[shortLen - 1])
-        : average(long[idx], long[idx + 1]);
-    }
-  } else {
-    let shortMidPt = getLeftMidPt(shortLen);
-    let longMidPt = combinedMidPt - shortMidPt - 1;
-    let leftMax = Math.max(short[shortMidPt], long[longMidPt]);
-    let rightMin = Math.min(short[shortMidPt + 1], long[longMidPt + 1]);
-    while (leftMax > rightMin) {
-      if (short[shortMidPt] === leftMax) {
-        shortMidPt = getLeftMidPt(shortMidPt + 1);
-        longMidPt = combinedMidPt - shortMidPt - 1;
-      } else {
-        const midPtShift = getLeftMidPt(shortLen - shortMidPt - 1) + 1;
-        shortMidPt += midPtShift;
-        longMidPt = combinedMidPt - shortMidPt - 1;
-      }
-      leftMax = Math.max(
-        short[shortMidPt] || -Infinity,
-        long[longMidPt] || -Infinity
-      );
-      rightMin = Math.min(
-        short[shortMidPt + 1] || Infinity,
-        long[longMidPt + 1] || Infinity
-      );
-    }
-    if (totalLength % 2 === 1) {
-      return Math.min(
-        short[shortMidPt + 1] || Infinity,
-        long[longMidPt + 1] || Infinity
-      );
-    } else {
-      let max = Math.max(
-        short[shortMidPt] || -Infinity,
-        long[longMidPt] || -Infinity
-      );
-      let min = Math.min(
-        short[shortMidPt + 1] || Infinity,
-        long[longMidPt + 1] || Infinity
-      );
-      return (max + min) / 2;
+      const longLeftMax = long[longPartition - 1] || -Infinity;
+      const shortLeftMax = short[shortPartition - 1] || -Infinity;
+      const leftMax = Math.max(longLeftMax, shortLeftMax);
+      if (totalLength % 2 === 1) return leftMax;
+      const longRightMin = long[longPartition] || Infinity;
+      const shortRightMin = short[shortPartition] || Infinity;
+      const rightMin = Math.min(longRightMin, shortRightMin);
+      return (rightMin + leftMax) / 2;
     }
   }
 };
