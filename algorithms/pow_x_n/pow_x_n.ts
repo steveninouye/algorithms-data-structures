@@ -21,20 +21,11 @@ Note:
 n is a 32-bit signed integer, within the range [−231, 231 − 1]
 */
 
-var intersection = function(nums1, nums2) {
-  let store = new Set();
-
-  for (let num of nums1) {
-    store.add(num);
+export const intersection = (nums1: number, nums2:number): number => {
+  let result = 1;
+  while (nums2 > 0 ){
+    result *= nums1
+    nums2--
   }
-
-  let store2 = new Set();
-
-  for (let num of nums2) {
-    if (store.has(num)) {
-      store2.add(num);
-    }
-  }
-
-  return Array.from(store2);
+  return result
 };
