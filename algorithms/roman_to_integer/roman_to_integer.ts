@@ -43,27 +43,6 @@ Input: "MCMXCIV"
 Output: 1994
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 */
-const romanToInt = (str) => {
-  const map = {
-    I: 1,
-    V: 5,
-    X: 10,
-    L: 50,
-    C: 100,
-    D: 500,
-    M: 1000
-  };
-  let result = 0;
-  const len = str.length;
-  for (let i = 0; i < len; i++) {
-    let num = map[str[i]];
-    let next = i === len - 1 ? 0 : map[str[i + 1]];
-    if (next > num) {
-      result += next - num;
-      i++;
-    } else {
-      result += num;
-    }
-  }
-  return result;
+export const romanToInt = (str: string):number => {
+  
 };
