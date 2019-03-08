@@ -46,10 +46,13 @@ export const findMedianSortedArrays = (nums1: number[], nums2: number[]) => {
   const totalLength = shortLen + longLen;
   let minIdx = 0;
   let maxIdx = shortLen;
-  const midPt = Math.floor((longLen + shortLen + 1) / 2);
+  // this will favor more partitions on the left
+  const totalLeftPartitions = Math.floor((longLen + shortLen) / 2);
+  // this will favore more partitions on the right
+  // const totalLeftPartitions = Math.floor((longLen + shortLen + 1) / 2);
   while (minIdx <= maxIdx) {
     let shortPartition = Math.floor((maxIdx + minIdx) / 2);
-    let longPartition = midPt - shortPartition;
+    let longPartition = totalLeftPartitions - shortPartition;
     if (shortPartition > 0 && short[shortPartition - 1] > long[longPartition]) {
       maxIdx = shortPartition - 1;
     } else if (
@@ -58,13 +61,14 @@ export const findMedianSortedArrays = (nums1: number[], nums2: number[]) => {
     ) {
       minIdx = shortPartition + 1;
     } else {
-      const longLeftMax = long[longPartition - 1] || -Infinity;
-      const shortLeftMax = short[shortPartition - 1] || -Infinity;
-      const leftMax = Math.max(longLeftMax, shortLeftMax);
-      if (totalLength % 2 === 1) return leftMax;
+      // the order in this block needs to change if favor sides one side or the other
       const longRightMin = long[longPartition] || Infinity;
       const shortRightMin = short[shortPartition] || Infinity;
       const rightMin = Math.min(longRightMin, shortRightMin);
+      if (totalLength % 2 === 1) return rightMin;
+      const longLeftMax = long[longPartition - 1] || -Infinity;
+      const shortLeftMax = short[shortPartition - 1] || -Infinity;
+      const leftMax = Math.max(longLeftMax, shortLeftMax);
       return (rightMin + leftMax) / 2;
     }
   }
