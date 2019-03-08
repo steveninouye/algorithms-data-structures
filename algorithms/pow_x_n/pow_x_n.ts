@@ -21,11 +21,22 @@ Note:
 n is a 32-bit signed integer, within the range [−231, 231 − 1]
 */
 
-export const intersection = (nums1: number, nums2:number): number => {
+export const intersection = (nums1: number, nums2: number): number => {
+  let num = nums2;
+  let base = nums1;
+  if (num < 0) {
+    base = 1 / base;
+    num = -num;
+  }
+
   let result = 1;
-  while (nums2 > 0 ){
-    result *= nums1
-    nums2--
+  let temp = base;
+  while (num > 0) {
+    if (num % 2 === 1) {
+      result *= base;
+    }
+    temp = temp * temp;
+    num = Math.floor(num / 2);
   }
   return result
 };
