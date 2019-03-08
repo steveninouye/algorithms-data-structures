@@ -20,7 +20,7 @@ Assume we are dealing with an environment which could only store integers within
 2^31 = 2147483648  flipped 8463847412
 */
 
-const reverse = (x) => {
+export const reverse = (x: number): number => {
   let result = 0;
   let num = Math.abs(x);
   if (num === 0 || num > 9999999999) return 0;
