@@ -21,6 +21,10 @@ Note:
 n is a 32-bit signed integer, within the range [−231, 231 − 1]
 */
 
+/*
+ *    x^(a+b) === x^a * x^b
+ */
+
 export const intersection = (nums1: number, nums2: number): number => {
   let num = nums2;
   let base = nums1;
@@ -38,5 +42,5 @@ export const intersection = (nums1: number, nums2: number): number => {
     temp = temp * temp;
     num = Math.floor(num / 2);
   }
-  return result
+  return result;
 };
