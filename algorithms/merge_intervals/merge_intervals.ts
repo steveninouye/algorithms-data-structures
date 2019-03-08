@@ -1,3 +1,12 @@
+class Interval {
+  start: number;
+  end: number;
+
+  constructor(start, end) {
+    this.start = start;
+    this.end = end;
+  }
+}
 /*
 Given a collection of intervals, merge all overlapping intervals.
 
@@ -24,27 +33,24 @@ Explanation: Intervals [1,4] and [4,5] are considered overlapping.
  * @param {Interval[]} intervals
  * @return {Interval[]}
  */
-const merge = (intervals) => {
+const merge = (intervals: Interval[]): Interval[] => {
   intervals.sort((a, b) => a.start - b.start);
-  return intervals.reduce((acc, curr, idx) => {
-    if (idx === 0) return [curr];
-
-    let lastIdx = acc.length - 1;
-    let last = acc[lastIdx];
-    if (curr.start <= last.end) {
-      if (curr.start <= last.start) {
-      } else {
-        curr.start = last.start;
+  let slow = 0;
+  for (var fast = 1; fast < intervals.length; fast++) {
+    if (intervals[fast].start <= intervals[slow].end) {
+      if (intervals[slow].end < intervals[fast].end) {
+        intervals[slow].end = intervals[fast].end;
       }
-      if (curr.end <= last.end) {
-        curr.end = last.end;
-      }
-      acc[lastIdx] = curr;
     } else {
-      acc.push(curr);
+      slow++;
     }
-    return acc;
-  }, []);
+  }
+  slow++;
+  while (slow < intervals.length) {
+    delete intervals[slow];
+    slow++;
+  }
+  return intervals;
 };
 
 export default merge;

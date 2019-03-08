@@ -20,24 +20,6 @@ nums2 = [3, 4]
 The median is (2 + 3)/2 = 2.5
 */
 
-const average = (num1: number, num2: number) => (num1 + num2) / 2;
-
-// get median of array
-const arrayMedian = (arr: number[]): number => {
-  let idx = getLeftMidPt(arr.length);
-  if (arr.length % 2 === 1) {
-    return arr[idx];
-  } else {
-    return (arr[idx] + arr[idx + 1]) / 2;
-  }
-};
-
-// mid point with left bias
-const getLeftMidPt = (length: number): number => Math.floor((length - 1) / 2);
-
-// mid point with right bias
-const getRightMidPt = (length: number): number => Math.floor(length / 2);
-
 export const findMedianSortedArrays = (nums1: number[], nums2: number[]) => {
   const [short, shortLen, long, longLen] =
     nums1.length > nums2.length
@@ -73,8 +55,3 @@ export const findMedianSortedArrays = (nums1: number[], nums2: number[]) => {
     }
   }
 };
-
-// const findMidIdx = (start, end) => Math.floor((end - start) / 2) + start;
-
-// const getLongIdx = (totalLength, shortIdx) =>
-//   Math.ceil(totalLength / 2) - shortIdx - 2;
