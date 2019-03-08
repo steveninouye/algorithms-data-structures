@@ -1,4 +1,4 @@
-import plusOne from './plus_one';
+import { plusOne } from './plus_one';
 
 describe('plus one', () => {
   it('should be defined', () => {

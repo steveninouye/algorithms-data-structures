@@ -20,21 +20,20 @@ Explanation: The array represents the integer 4321.
  * @param {number[]} digits
  * @return {number[]}
  */
-const plusOne = (digits) => {
-  let carry: number = 0;
-  let lastIdx: number = digits.length - 1;
-  for (let i = lastIdx; i >= 0; i--) {
-    if (digits[i] === 9) {
-      carry = 1;
-      digits[i] = 0;
-    } else {
+export const plusOne = (digits:number[]):number[] => {
+  let carry = 1
+  let idx = digits.length -1
+  while(carry > 0 && idx >= 0) {
+    if(digits[idx] <9) {
+      digits[idx]++
       carry = 0;
-      digits[i] += 1;
-      break;
+    } else {
+      digits[idx] = 0;
+      idx--
     }
   }
-  if (carry === 1) digits.unshift(1);
-  return digits;
+  if(carry === 1){
+    digits.unshift(1)
+  }
+  return digits
 };
-
-export default plusOne;
