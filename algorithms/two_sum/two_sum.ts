@@ -18,13 +18,14 @@ return [0, 1].
  * @param {number} target
  * @returns {number[]}
  */
-export const twoSum = (nums: number[], target: number):number[] => {
-  const store = {}
-  for(var i = 0; i < nums.length; i++) {
-    const difference = target - nums[i]
-    if(store[difference]) {
-      return [store[difference], i]
+export const twoSum = (nums: number[], target: number): number[] => {
+  const store = {};
+  for (var i = 0; i < nums.length; i++) {
+    const num = nums[i];
+    const difference = target - num;
+    if (store[difference] !== undefined) {
+      return [store[difference], i];
     }
-    store[nums[i]] = i
+    store[num] = i;
   }
 };
