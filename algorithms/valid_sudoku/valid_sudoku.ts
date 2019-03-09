@@ -59,51 +59,27 @@ The given board size is always 9x9.
 // see if value is already in set to corresponding row, col, and grid numbers
 //// if value exist return false
 // if all cells are examined return true */
-const isValidSudoku = (board) => {
-  let row = {
-    0: new Set(),
-    1: new Set(),
-    2: new Set(),
-    3: new Set(),
-    4: new Set(),
-    5: new Set(),
-    6: new Set(),
-    7: new Set(),
-    8: new Set()
-  };
-  let col = {
-    0: new Set(),
-    1: new Set(),
-    2: new Set(),
-    3: new Set(),
-    4: new Set(),
-    5: new Set(),
-    6: new Set(),
-    7: new Set(),
-    8: new Set()
-  };
-  let grid = {
-    0: new Set(),
-    1: new Set(),
-    2: new Set(),
-    3: new Set(),
-    4: new Set(),
-    5: new Set(),
-    6: new Set(),
-    7: new Set(),
-    8: new Set()
-  };
-  for (let rowNum = 0; rowNum < board.length; rowNum++) {
-    for (let colNum = 0; colNum < board[rowNum].length; colNum++) {
-      let value = board[rowNum][colNum];
-      if (value === '.') continue;
-      if (row[rowNum].has(value) || col[colNum].has(value))
-        return false;
-      let gridNum = getGrid(rowNum, colNum);
-      if (grid[gridNum].has(value)) return false;
-      row[rowNum].add(value);
-      col[colNum].add(value);
-      grid[gridNum].add(value);
+export const isValidSudoku = (board: string[][]): boolean => {
+  let rows = [];
+  let cols = [];
+  let grids = [];
+  for (var i = 0; i < 9; i++) {
+    rows.push({});
+    cols.push({});
+    grids.push({});
+  }
+  for (var row = 0; row < 9; row++) {
+    for (var col = 0; col < 9; col++) {
+      let el = board[row][col];
+      if (el !== '.') {
+        if (rows[row][el]) return false;
+        if (cols[col][el]) return false;
+        let grid = getGrid(row, col);
+        if (grids[grid][el]) return false;
+        rows[row][el] = true;
+        cols[col][el] = true;
+        grids[grid][el] = true;
+      }
     }
   }
   return true;
