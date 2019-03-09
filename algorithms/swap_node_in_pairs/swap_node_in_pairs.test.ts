@@ -1,5 +1,5 @@
-import { SinglyLinkNode } from '../../data_structures/nodes/nodes';
-import swapPairs from './swap_node_in_pairs';
+import { SinglyLinkNode as ListNode } from '../../data_structures/nodes/nodes';
+import { swapPairs } from './swap_node_in_pairs';
 
 describe('swap pairs', () => {
   it('should be defined', () => {
@@ -7,12 +7,12 @@ describe('swap pairs', () => {
   });
 
   it('should swap every two nodes', () => {
-    const root = new SinglyLinkNode(3);
-    const node1 = new SinglyLinkNode(4);
-    const node2 = new SinglyLinkNode(5);
-    const node3 = new SinglyLinkNode(6);
-    const node4 = new SinglyLinkNode(7);
-    const node5 = new SinglyLinkNode(8);
+    const root = new ListNode(3);
+    const node1 = new ListNode(4);
+    const node2 = new ListNode(5);
+    const node3 = new ListNode(6);
+    const node4 = new ListNode(7);
+    const node5 = new ListNode(8);
     root.next = node1;
     node1.next = node2;
     node2.next = node3;
