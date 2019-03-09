@@ -1,4 +1,4 @@
-import twoSum from './two_sum';
+import { twoSum } from './two_sum';
 
 describe('#twoSum', () => {
   it('should be defined', () => {

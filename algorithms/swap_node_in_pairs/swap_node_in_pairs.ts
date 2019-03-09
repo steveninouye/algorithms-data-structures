@@ -24,17 +24,17 @@ Given 1->2->3->4, you should return the list as 2->1->4->3.
  * @param {ListNode} head
  * @return {ListNode}
  */
-export const swapPairs = (left: ListNode): ListNode => {
+export const swapPairs = (head: ListNode): ListNode => {
   const dummy = new ListNode(0);
   let prev = dummy;
-  dummy.next = left;
-  while (left && left.next) {
-    let right = left.next;
-    left.next = right.next;
-    right.next = left;
+  dummy.next = head;
+  while (head && head.next) {
+    let right = head.next;
+    head.next = right.next;
+    right.next = head;
     prev.next = right;
-    prev = left;
-    left = prev.next;
+    prev = head;
+    head = prev.next;
   }
   return dummy.next;
 };
