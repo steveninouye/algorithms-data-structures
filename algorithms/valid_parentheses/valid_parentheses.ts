@@ -29,24 +29,25 @@ Input: "{[]}"
 Output: true
 */
 
-const isValid = (s) => {
-  let mapClose = {
-    ')': '(',
-    '}': '{',
-    ']': '['
-  };
+const isValid = (s: string): boolean => {
   let stack = [];
-  for (let i = 0; i < s.length; i++) {
-    let ltr = s[i];
-    if (mapClose[ltr]) {
-      if (stack.length === 0 || stack.pop() !== mapClose[ltr]) {
-        return false;
-      }
+  const map = {
+    ']': '[',
+    '}': '{',
+    ')': '('
+  };
+  const closeChars = Object.keys(map);
+  for (var i = 0; i < s.length; i++) {
+    const char = s[i];
+    if (closeChars.includes(char) && stack[stack.length - 1] !== map[char]) {
+      return false;
+    } else if (map[char] && stack[stack.length - 1] === map[char]) {
+      stack.pop();
     } else {
-      stack.push(ltr);
+      stack.push(char);
     }
   }
-  return stack.length === 0;
+  return true;
 };
 
 console.log(isValid('([)]'));
