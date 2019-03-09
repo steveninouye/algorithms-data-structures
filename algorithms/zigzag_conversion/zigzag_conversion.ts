@@ -27,24 +27,19 @@ Y A   H R
 P     I
 */
 
-const convert = function(str, numRows) {
-  if (numRows === 1) return str;
-  let buckets = new Array(numRows).fill('');
+export const convert = (str: string, numRows: number): string => {
+  if (numRows === 0) return str;
+  const buckets: string[] = [];
+  for (var i = 0; i < numRows; i++) buckets.push('');
+  let bucketDelta = -1;
   let bucketIdx = 0;
-  let up = true;
-  for (let i = 0; i < str.length; i++) {
-    buckets[bucketIdx] += str[i];
-    if (up) {
-      bucketIdx++;
-      if (bucketIdx === numRows - 1) {
-        up = false;
-      }
-    } else {
-      bucketIdx--;
-      if (bucketIdx === 0) {
-        up = true;
-      }
+  for (var i = 0; i < str.length; i++) {
+    const letter = str[i];
+    buckets[bucketIdx] += letter;
+    if (bucketIdx === numRows - 1 || bucketIdx === 0) {
+      bucketDelta *= -1;
     }
+    bucketIdx += bucketDelta;
   }
-  return buckets.join('');
+  return buckets.reduce((acc, curr) => acc + curr);
 };
