@@ -32,33 +32,31 @@ Output: 28
  * @return {number}
  */
 const uniquePaths = (m, n) => {
-  if (m < 1 || n < 1) {
-    throw new Error('input needs to be greater than 0');
-  }
-  if (m === 1 || n === 1) {
-    return 1;
-  } else if (m === n) {
-    return uniquePaths(m, n - 1) * 2;
+  if (m < 1 || n < 1) throw 'input needs to be greater than 0';
+  if (m === 1 || n === 1) return 1;
+  let down, right;
+  down = uniquePaths(m - 1, n);
+  if (m === n) {
+    right = down;
   } else {
-    return uniquePaths(m - 1, n) + uniquePaths(m, n - 1);
+    right = uniquePaths(m, n - 1);
   }
+  return down + right;
 };
 
 const iUniquePaths = (m, n) => {
   if (m < 1 || n < 1) throw 'input needs to be greater than 0';
-
-  const store: number[] = [];
-  for (let i = 0; i < m; i++) {
-    store.push(1);
+  const row = [];
+  for (var i = 0; i < n; i++) {
+    row.push(1);
   }
-
-  for (let row = 1; row < n; row++) {
-    for (let col = 0; col < store.length; col++) {
-      store[col] += store[col - 1] || 0;
+  for (let i = 0; i < m - 1; i++) {
+    for (let j = 0; j < n; j++) {
+      let prev = row[j - 1] || 0;
+      row[j] += prev;
     }
   }
-
-  return store[m - 1];
+  return row[row.length - 1];
 };
 
 export { iUniquePaths, uniquePaths };
