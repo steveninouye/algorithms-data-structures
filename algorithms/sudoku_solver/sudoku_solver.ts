@@ -21,6 +21,8 @@ The given board contain only digits 1-9 and the character '.'.
 You may assume that the given Sudoku puzzle will have a single unique solution.
 The given board size is always 9x9.
 */
+type Board = number[][] | number[][][];
+type Tile = number | number[];
 
 export const getGrid = (row: number, col: number): number => {
   if (row < 3) {
@@ -51,7 +53,7 @@ export const getGrid = (row: number, col: number): number => {
 };
 
 export const forEachRowSibling = (
-  board: number[][],
+  board: Board,
   row: number,
   cb: Function
 ): void => {
@@ -61,7 +63,7 @@ export const forEachRowSibling = (
 };
 
 export const forEachColSibling = (
-  board: number[][],
+  board: Board,
   col: number,
   cb: Function
 ): void => {
@@ -71,13 +73,13 @@ export const forEachColSibling = (
 };
 
 export const forEachGridSibling = (
-  board: number[][],
+  board: Board,
   col: number,
   cb: Function
 ): void => {};
 
 export const forEachSibling = (
-  board: number[][],
+  board: Board,
   { row, col }: { row: number; col: number },
   cb: Function
 ): void => {
@@ -86,16 +88,21 @@ export const forEachSibling = (
   forEachGridSibling(board, col, cb);
 };
 
-export const getPossibilities = (board: number[][]): void => {
+export const getPossibilities = (board: Board): void => {
   for (var row = 0; row < board.length; row++) {
     for (var col = 0; col < board[row].length; col++) {
       if (!board[row][col]) {
-        forEachSibling(board, { row, col }, () => {
-          console.log('work on me now! haha');
+        const tile =  [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        board[row][col] = tile
+        forEachSibling(board, { row, col }, (val:Tile) => {
+          if(typeof val === "number") {
+            const valIdx = tile.indexOf(val)
+            if(valIdx > -1) tile.splice(valIdx, 1)
+          }
         });
       }
     }
   }
 };
 
-export const solveSudoku = (board: number[][]): void => {};
+export const solveSudoku = (board: Board[]): void => {};
