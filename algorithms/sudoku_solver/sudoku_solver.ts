@@ -23,6 +23,7 @@ The given board size is always 9x9.
 */
 type Board = number[][] | number[][][];
 type Tile = number | number[];
+type RowCol = { row: number; col: number };
 
 export const getGrid = (row: number, col: number): number => {
   if (row < 3) {
@@ -74,30 +75,30 @@ export const forEachColSibling = (
 
 export const forEachGridSibling = (
   board: Board,
-  col: number,
+  { row, col }: RowCol,
   cb: Function
 ): void => {};
 
 export const forEachSibling = (
   board: Board,
-  { row, col }: { row: number; col: number },
+  { row, col }: RowCol,
   cb: Function
 ): void => {
   forEachRowSibling(board, row, cb);
   forEachColSibling(board, col, cb);
-  forEachGridSibling(board, col, cb);
+  forEachGridSibling(board, { row, col }, cb);
 };
 
 export const getPossibilities = (board: Board): void => {
   for (var row = 0; row < board.length; row++) {
     for (var col = 0; col < board[row].length; col++) {
       if (!board[row][col]) {
-        const tile =  [1, 2, 3, 4, 5, 6, 7, 8, 9];
-        board[row][col] = tile
-        forEachSibling(board, { row, col }, (val:Tile) => {
-          if(typeof val === "number") {
-            const valIdx = tile.indexOf(val)
-            if(valIdx > -1) tile.splice(valIdx, 1)
+        const tile = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        board[row][col] = tile;
+        forEachSibling(board, { row, col }, (val: Tile) => {
+          if (typeof val === 'number') {
+            const valIdx = tile.indexOf(val);
+            if (valIdx > -1) tile.splice(valIdx, 1);
           }
         });
       }
