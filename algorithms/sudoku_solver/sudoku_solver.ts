@@ -22,36 +22,36 @@ You may assume that the given Sudoku puzzle will have a single unique solution.
 The given board size is always 9x9.
 */
 type Board = number[][] | number[][][];
-type Tile = number | number[];
+type Tile = number[] | number;
 type RowCol = { row: number; col: number };
 
-export const getGrid = (row: number, col: number): number => {
-  if (row < 3) {
-    if (col < 3) {
-      return 0;
-    } else if (col < 6) {
-      return 1;
-    } else {
-      return 2;
-    }
-  } else if (row < 6) {
-    if (col < 3) {
-      return 3;
-    } else if (col < 6) {
-      return 4;
-    } else {
-      return 5;
-    }
-  } else {
-    if (col < 3) {
-      return 6;
-    } else if (col < 6) {
-      return 7;
-    } else {
-      return 8;
-    }
-  }
-};
+// export const getGrid = (row: number, col: number): number => {
+//   if (row < 3) {
+//     if (col < 3) {
+//       return 0;
+//     } else if (col < 6) {
+//       return 1;
+//     } else {
+//       return 2;
+//     }
+//   } else if (row < 6) {
+//     if (col < 3) {
+//       return 3;
+//     } else if (col < 6) {
+//       return 4;
+//     } else {
+//       return 5;
+//     }
+//   } else {
+//     if (col < 3) {
+//       return 6;
+//     } else if (col < 6) {
+//       return 7;
+//     } else {
+//       return 8;
+//     }
+//   }
+// };
 
 export const forEachRowSibling = (
   board: Board,
@@ -77,7 +77,15 @@ export const forEachGridSibling = (
   board: Board,
   { row, col }: RowCol,
   cb: Function
-): void => {};
+): void => {
+  const rowStart = row - (row % 3);
+  const colStart = col - (col % 3);
+  for (var rowIdx = rowStart; rowIdx < rowStart + 3; rowIdx++) {
+    for (var colIdx = colStart; colIdx < colStart + 3; colIdx++) {
+      cb(board[rowIdx][colIdx]);
+    }
+  }
+};
 
 export const forEachSibling = (
   board: Board,
@@ -89,21 +97,90 @@ export const forEachSibling = (
   forEachGridSibling(board, { row, col }, cb);
 };
 
-export const getPossibilities = (board: Board): void => {
+export const getPossibilities = (board: Board, { row, col }: RowCol): void => {
+  const tile = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  board[row][col] = tile;
+  forEachSibling(board, { row, col }, (val: Tile) => {
+    if (typeof val === 'number') {
+      const valIdx = tile.indexOf(val);
+      if (valIdx > -1) tile.splice(valIdx, 1);
+    }
+  });
+};
+
+export const forEachTile = (board: Board, cb: Function): void => {
   for (var row = 0; row < board.length; row++) {
     for (var col = 0; col < board[row].length; col++) {
-      if (!board[row][col]) {
-        const tile = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-        board[row][col] = tile;
-        forEachSibling(board, { row, col }, (val: Tile) => {
-          if (typeof val === 'number') {
-            const valIdx = tile.indexOf(val);
-            if (valIdx > -1) tile.splice(valIdx, 1);
-          }
-        });
-      }
+      cb(board[row][col], row, col);
     }
   }
 };
 
-export const solveSudoku = (board: Board[]): void => {};
+export const assignPossibilitiesToTiles = (board: Board): void => {
+  forEachTile(board, (tile: Tile, row: number, col: number) => {
+    if (!board[row][col]) {
+      getPossibilities(board, { row, col });
+    }
+  });
+};
+
+export const findTileWithLeastPossibilities = (
+  board: Board
+): { tile: number[]; row: number; col: number } => {
+  let minTile = { tile: new Array(10), row: 0, col: 0 };
+  forEachTile(board, (tile: Tile, row: number, col: number) => {
+    if (typeof tile !== 'number') {
+      if (minTile.tile.length > tile.length) {
+        minTile = { tile, row, col };
+      }
+    }
+  });
+  return minTile;
+};
+
+export const addValueToTile = (
+  board: Board,
+  { row, col }: RowCol,
+  val: number
+) => {
+  board[row][col] = val;
+  forEachSibling(board, { row, col }, (tile: Tile) => {
+    if (typeof tile !== 'number') {
+      const valIdx = tile.indexOf(val);
+      if (valIdx > -1) tile.splice(valIdx, 1);
+    }
+  });
+};
+
+export const removeValueFromTile = (
+  board: Board,
+  { row, col }: RowCol,
+  val: number
+) => {
+  board[row][col] = val;
+  forEachSibling(board, { row, col }, (tile: Tile) => {
+    if (typeof tile !== 'number') {
+      tile.push(val);
+    }
+  });
+};
+
+export const solve = (board: Board): boolean => {
+  const { tile, row, col } = findTileWithLeastPossibilities(board);
+  if (tile.length === 10) return true;
+  if (tile.length === 0) return false;
+  for (var i = 0; i < tile.length; i++) {
+    const val = tile[i];
+    addValueToTile(board, { row, col }, val);
+    const result = solve(board);
+    if (result === true) return true;
+    removeValueFromTile(board, { row, col }, val);
+  }
+  board[row][col] = tile;
+  return false;
+};
+
+export const solveSudoku = (board: Board): void => {
+  assignPossibilitiesToTiles(board);
+  solve(board);
+};

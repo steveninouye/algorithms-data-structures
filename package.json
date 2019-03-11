@@ -24,7 +24,9 @@
     "url": "https://github.com/steveninouye/algorithms-data-structures/issues"
   },
   "homepage": "https://github.com/steveninouye/algorithms-data-structures#readme",
-  "dependencies": {},
+  "dependencies": {
+    "request": "^2.88.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.3.1",
