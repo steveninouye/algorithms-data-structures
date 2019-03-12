@@ -32,6 +32,23 @@ the gap between the 5th and 6th stone is too large.
 */
 
 /**
+ *
+ *
+ * @param {number[]} arr
+ * @param {number} start
+ * @param {number} val
+ * @returns {(boolean | number)}
+ */
+const getIndexOfVal = (arr: number[], start: number, val: number) => {
+  for (var i = start; i < arr.length; i++) {
+    const num = arr[i];
+    if (val === num) return i;
+    if (num > val) return false;
+  }
+  return false;
+};
+
+/**
  * @param {number[]} stones
  * @return {boolean}
  */
