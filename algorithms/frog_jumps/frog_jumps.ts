@@ -39,22 +39,23 @@ the gap between the 5th and 6th stone is too large.
  * @param {number} val
  * @returns {(boolean | number)}
  */
-const getIndexOfVal = (arr: number[], start: number, val: number) => {
-  for (var i = start; i < arr.length; i++) {
-    const num = arr[i];
+const getIndexOfVal = (stones: number[], start: number, val: number) => {
+  for (var i = start; i < stones.length; i++) {
+    const num = stones[i];
     if (val === num) return i;
     if (num > val) return false;
   }
   return false;
 };
 
-/**
- *
- *
- * @param {number[]} stones
- * @param {number} [start=0]
- * @param {number} [numJumps=1]
- */
-const canCross = (stones: number[], start = 0, numJumps = 1) => {
-
+const canCross = (stones: number[], currIdx = 0, numJumps = 1): boolean => {
+  if (currIdx >= stones.length - 1) return true;
+  const currentStone = stones[currIdx];
+  const index = getIndexOfVal(stones, currIdx + 1, currentStone + numJumps);
+  if (index === false) return false;
+  for (var jump = numJumps + 1; jump >= numJumps - 1; jump--) {
+    const next = canCross(stones, index, jump);
+    if (next === true) return true;
+  }
+  return false;
 };
