@@ -49,8 +49,12 @@ const getIndexOfVal = (arr: number[], start: number, val: number) => {
 };
 
 /**
+ *
+ *
  * @param {number[]} stones
- * @return {boolean}
+ * @param {number} [start=0]
+ * @param {number} [numJumps=1]
  */
+const canCross = (stones: number[], start = 0, numJumps = 1) => {
 
-const canCross = (stones) => {};
+};
