@@ -27,4 +27,18 @@ Explanation: There are three ways to climb to the top.
  * @param {number} n
  * @return {number}
  */
-var climbStairs = function(n) {};
+const climbStairs = (n: number): number => {
+  if(n < 0) return 0;
+  if(n < 3) return n;
+  
+  let onePrevStep = 1;
+  let twoPrevStep = 2;
+  let currentStep = 0;
+  
+  for(var i = 3; i <= n; i++) {
+      currentStep = onePrevStep + twoPrevStep;
+      onePrevStep = twoPrevStep;
+      twoPrevStep = currentStep;
+  }
+  return currentStep;
+};
