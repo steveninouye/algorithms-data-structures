@@ -42,7 +42,7 @@ Could you devise a constant space solution?
  * @return {void} Do not return anything, modify matrix in-place instead.
  */
 
-const setZeroes = (matrix: number[][]) => {
+const setZeroes = (matrix: number[][]): void => {
   let isCol = false;
   const rowLen = matrix.length;
   const colLen = matrix[0].length;
