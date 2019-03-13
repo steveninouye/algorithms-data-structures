@@ -70,13 +70,13 @@ const setZeroes = (matrix: number[][]) => {
 
   if (matrix[0][0] === 0) {
     for (var col = 1; col < colLen; col++) {
-      matrix[0][col] === 0;
+      matrix[0][col] = 0;
     }
   }
 
   if (isCol) {
     for (var row = 0; row < rowLen; row++) {
-      matrix[row][0] === 0;
+      matrix[row][0] = 0;
     }
   }
 };
