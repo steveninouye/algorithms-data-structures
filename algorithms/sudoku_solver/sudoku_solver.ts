@@ -25,34 +25,6 @@ type Board = number[][] | number[][][];
 type Tile = number[] | number;
 type RowCol = { row: number; col: number };
 
-// export const getGrid = (row: number, col: number): number => {
-//   if (row < 3) {
-//     if (col < 3) {
-//       return 0;
-//     } else if (col < 6) {
-//       return 1;
-//     } else {
-//       return 2;
-//     }
-//   } else if (row < 6) {
-//     if (col < 3) {
-//       return 3;
-//     } else if (col < 6) {
-//       return 4;
-//     } else {
-//       return 5;
-//     }
-//   } else {
-//     if (col < 3) {
-//       return 6;
-//     } else if (col < 6) {
-//       return 7;
-//     } else {
-//       return 8;
-//     }
-//   }
-// };
-
 export const forEachRowSibling = (
   board: Board,
   row: number,
