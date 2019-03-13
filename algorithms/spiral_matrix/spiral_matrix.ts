@@ -22,4 +22,33 @@ Input:
 ]
 Output: [1,2,3,4,8,12,11,10,9,5,6,7]
 */
-export const spiralOrder = (matrix: number[][]): number[] => {};
+export const spiralOrder = (matrix: number[][]): number[] => {
+  const result = [];
+  let top = 0;
+  let left = 0;
+  let right = matrix[0].length - 1;
+  let bottom = matrix.length - 1;
+
+  while (top <= bottom && left <= right) {
+    for (var col = left; col <= right; col++) {
+      result.push(matrix[top][col]);
+    }
+    top++;
+    for (var row = top; row <= bottom; row++) {
+      result.push(matrix[row][right]);
+    }
+    right--;
+    if (top <= bottom) {
+      for (var col = right; col >= left; col--) {
+        result.push(matrix[bottom][col]);
+      }
+      bottom--;
+    }
+    if (left <= right) {
+      for (var row = bottom; row >= top; row--) {
+        result.push(matrix[row][left]);
+      }
+    }
+  }
+  return result;
+};
