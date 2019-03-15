@@ -10,14 +10,4 @@ Given nums = [2, 7, 11, 15], target = 9,
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 */
-export const twoSum = (nums: number[], target: number): number[] => {
-  const store = {};
-  for (var i = 0; i < nums.length; i++) {
-    const num = nums[i];
-    const difference = target - num;
-    if (store[difference] !== undefined) {
-      return [store[difference], i];
-    }
-    store[num] = i;
-  }
-};
+export const twoSum = (nums: number[], target: number): number[] => {};
