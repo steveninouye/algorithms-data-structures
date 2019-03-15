@@ -12,4 +12,13 @@ return [0, 1].
 */
 export const twoSum = (nums: number[], target: number): number[] => {
   const store = {};
+  for (var i = 0; i < nums.length; i++) {
+    const difference = (target = nums[i]);
+    if (store[difference] === undefined) {
+      store[nums[i]] = i;
+    } else {
+      return [store[difference], i];
+    }
+  }
+  return [-1, -1];
 };
