@@ -31,15 +31,7 @@ Return false. There is no way to jump to the last stone as
 the gap between the 5th and 6th stone is too large.
 */
 
-/**
- *
- *
- * @param {number[]} arr
- * @param {number} start
- * @param {number} val
- * @returns {(boolean | number)}
- */
-const getIndexOfVal = (stones: number[], start: number, val: number) => {
+export const getIndexOfVal = (stones: number[], start: number, val: number) => {
   for (var i = start; i < stones.length; i++) {
     const num = stones[i];
     if (val === num) return i;
