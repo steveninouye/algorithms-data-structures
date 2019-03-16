@@ -23,10 +23,6 @@ Explanation: There are three ways to climb to the top.
 3. 2 steps + 1 step
 */
 
-/**
- * @param {number} n
- * @return {number}
- */
 const climbStairs = (n: number): number => {
   if(n < 0) return 0;
   if(n < 3) return n;
