@@ -19,7 +19,7 @@ Input: nums = [5,7,7,8,8,10], target = 6
 Output: [-1,-1]
 */
 
-const searchRange = (nums: number[], target: number): number[] => {
+export const searchRange = (nums: number[], target: number): number[] => {
   let left = 0;
   let right = nums.length - 1;
   while (left < right) {
