@@ -40,7 +40,7 @@ export const getIndexOfVal = (stones: number[], start: number, val: number) => {
   return false;
 };
 
-const canCross = (stones: number[], currIdx = 0, numJumps = 1): boolean => {
+export const canCross = (stones: number[], currIdx = 0, numJumps = 1): boolean => {
   if (currIdx >= stones.length - 1) return true;
   const currentStone = stones[currIdx];
   const index = getIndexOfVal(stones, currIdx + 1, currentStone + numJumps);
