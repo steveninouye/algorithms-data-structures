@@ -1,5 +1,6 @@
 import Tile from './tile';
 import directions from './directions';
+import randomNum from './randomNumber';
 
 class Board {
   matrix: Tile[][];
@@ -108,13 +109,19 @@ class Board {
   }
 
   renderMatrix() {
-    console.log(this.matrix);
+    this.matrix.forEach((row) => {
+      const values = row.map((tile) => {
+        if (tile.val) return tile.val;
+        return '_';
+      });
+      console.log(values);
+    });
   }
 
   addNewTile() {
     console.log('Adding New Tile');
-    // set game over here
-    return false;
+    const tileIdx = randomNum(0, this.availableTiles.length);
+    this.availableTiles[tileIdx].random();
   }
 }
 

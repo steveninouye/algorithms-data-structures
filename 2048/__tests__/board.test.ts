@@ -51,12 +51,14 @@ describe('Board', () => {
     });
   });
 
-  describe('#moveTiles', () => {
-    it('should receive a direction', () => {});
+  describe('#move', () => {
+    it('should change the matrix on Board after completion', () => {
+      
+    });
 
-    it('should change the matrix on Board after completion', () => {});
+    it('should return the new total score', () => {
 
-    it('should return the new total score', () => {});
+    });
 
     it('should throw error if no move was made', () => {});
   });
