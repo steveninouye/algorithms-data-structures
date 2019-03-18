@@ -119,9 +119,11 @@ class Board {
   }
 
   addNewTile() {
+    if (this.availableTiles.length === 0) return false;
     console.log('Adding New Tile');
     const tileIdx = randomNum(0, this.availableTiles.length);
     this.availableTiles[tileIdx].random();
+    return true;
   }
 }
 

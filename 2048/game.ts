@@ -23,11 +23,12 @@ class Game {
 
   getDirection() {
     console.log('What direction would you like to move?:');
+    // TODO: get direction from player
     return 'right';
   }
 
   renderGameResult(){
-
+    // TODO: render game result
   }
 }
 
