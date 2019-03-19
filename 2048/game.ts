@@ -1,4 +1,4 @@
-import Board from './board';
+import Board from './Board';
 
 class Game {
   board: Board;

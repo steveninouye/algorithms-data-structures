@@ -1,4 +1,4 @@
-import Tile from './tile';
+import Tile from './Tile';
 import directions from './directions';
 import randomNum from './randomNumber';
 

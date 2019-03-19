@@ -1,5 +1,5 @@
-import Board from '../board';
-import Tile from '../tile';
+import Board from '../Board';
+import Tile from '../Tile';
 
 describe('Board', () => {
   it('should be defined', () => {
