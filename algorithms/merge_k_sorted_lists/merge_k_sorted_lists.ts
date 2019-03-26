@@ -14,6 +14,10 @@ export class MinHeap {
     this.store = [];
   }
 
+  count() {
+    return this.store.length;
+  }
+
   insert(val: ListNode) {
     this.store.push(val);
     this.heapifyUp();
@@ -23,7 +27,7 @@ export class MinHeap {
     const { store } = this;
     const result = store[0];
     store[0] = store.pop();
-    this.heapifyDown()
+    this.heapifyDown();
     return result;
   }
 
@@ -38,8 +42,18 @@ export class MinHeap {
     }
   }
 
-  heapifyDown(idx = 0){
-    
+  heapifyDown(idx = 0) {
+    const { store } = this;
+    const childIdx1 = idx * 2 + 1;
+    const childIdx2 = idx * 2 + 2;
+    const minChildIdx =
+      store[childIdx1] > store[childIdx2] ? childIdx2 : childIdx1;
+    if (store[minChildIdx] < store[idx]) {
+      const temp = store[idx];
+      store[idx] = store[minChildIdx];
+      store[minChildIdx] = temp;
+      this.heapifyDown(minChildIdx);
+    }
   }
 }
 
