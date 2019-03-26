@@ -1,4 +1,4 @@
-const { MinHeap, ListNode, mergeKLists } = require('./merge_k_sorted_lists');
+import { MinHeap, ListNode, mergeKLists } from './merge_k_sorted_lists';
 
 const generateListofLinkLists = (list) => {
   return list.map((arr) => arrToLinkList(arr));
@@ -80,9 +80,7 @@ describe('MinHeap', () => {
       expect(heap.push).toBeDefined();
     });
 
-    it('should have extract function on its prototype', () => {
-      
-    });
+    it('should have extract function on its prototype', () => {});
 
     it('should be able to push values onto its store', () => {});
 
