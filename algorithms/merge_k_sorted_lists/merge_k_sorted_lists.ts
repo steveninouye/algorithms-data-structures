@@ -34,7 +34,7 @@ export class MinHeap {
   heapifyUp(idx = this.store.length - 1) {
     const { store } = this;
     const parentIdx = Math.floor((idx - 1) / 2);
-    if (store[idx] < store[parentIdx]) {
+    if (store[idx].val < store[parentIdx].val) {
       const temp = store[idx];
       store[idx] = store[parentIdx];
       store[parentIdx] = temp;
@@ -47,8 +47,8 @@ export class MinHeap {
     const childIdx1 = idx * 2 + 1;
     const childIdx2 = idx * 2 + 2;
     const minChildIdx =
-      store[childIdx1] > store[childIdx2] ? childIdx2 : childIdx1;
-    if (store[minChildIdx] < store[idx]) {
+      store[childIdx1].val > store[childIdx2].val ? childIdx2 : childIdx1;
+    if (store[minChildIdx].val < store[idx].val) {
       const temp = store[idx];
       store[idx] = store[minChildIdx];
       store[minChildIdx] = temp;
@@ -64,7 +64,7 @@ export const mergeKLists = (list: ListNode[]): ListNode => {
   for (let node of list) {
     heap.insert(node);
   }
-  while (heap.store.length > 0) {
+  while (heap.count() > 0) {
     const node = heap.extract();
     currNode.next = node;
     if (node.next) {
