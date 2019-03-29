@@ -7,7 +7,8 @@ export class Piece {
   board: Board;
   pos: Pos;
   validMoves: Pos[];
-  
+  maxMoves: number;
+
   constructor(color: string, board: Board, row: number, col: number) {
     this.color = color;
     this.board = board;
@@ -17,13 +18,22 @@ export class Piece {
 
   move() {}
 
-  getMoves() {
-    this.getAllMoves();
+  getValidMoves() {
+    this.validMoves = [];
+    this.findAllMoves();
     this.filterMoves();
     return this.movesAvailable;
   }
 
-  getAllMoves(pos: Pos) {}
+  findAllMoves(pos: Pos, maxMoves = this.maxMoves): void {
+    const { row, col } = pos;
+    if (
+      this.board[row][col].instanceOf(Piece) ||
+      [row, col].some((el) => el < 0 || el > 8)
+    )
+      return;
+    
+  }
 
   filterMoves() {}
 }
