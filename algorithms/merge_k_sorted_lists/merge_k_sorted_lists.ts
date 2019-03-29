@@ -18,17 +18,17 @@ export class MinHeap {
     return this.store.length;
   }
 
-  insert(val: ListNode) {
-    this.store.push(val);
+  insert(node: ListNode) {
+    this.store.push(node);
     this.heapifyUp();
   }
 
   extract() {
     const { store } = this;
-    const result = store[0];
+    const node = store[0];
     store[0] = store.pop();
     this.heapifyDown();
-    return result;
+    return node;
   }
 
   heapifyUp(idx = this.store.length - 1) {
