@@ -1,6 +1,7 @@
 import { Board } from './board';
 
 type Pos = { row: number; col: number };
+type PosDelta = { rowDelta: number; colDelta: number };
 
 export class Piece {
   color: string;
@@ -25,13 +26,14 @@ export class Piece {
     return this.validMoves;
   }
 
-  findAllMoves(pos: Pos, maxMoves = this.maxMoves): void {
+  findAllMoves(pos: Pos, posDelta: PosDelta, maxMoves = this.maxMoves): void {
     const { row, col } = pos;
     if (
       this.board[row][col].instanceOf(Piece) ||
       [row, col].some((el) => el < 0 || el > 8)
     )
       return;
+    const { rowDelta, colDelta } = posDelta;
   }
 
   filterMoves() {}
