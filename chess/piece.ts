@@ -8,6 +8,7 @@ export class Piece {
   board: Board;
   pos: Pos;
   validMoves: Pos[];
+  posDeltas: PosDelta[];
   maxMoves: number;
 
   constructor(color: string, board: Board, row: number, col: number) {
@@ -20,7 +21,11 @@ export class Piece {
   move() {}
 
   getValidMoves() {
-    this.validMoves = [];
+    const { pos, posDeltas };
+    this.resetValidMoves();
+    for (let posDelta of this.posDeltas) {
+      const rowDelta = this.findAllMoves;
+    }
     this.findAllMoves();
     this.filterMoves();
     return this.validMoves;
@@ -37,4 +42,8 @@ export class Piece {
   }
 
   filterMoves() {}
+
+  resetValidMoves() {
+    this.validMoves = [];
+  }
 }
