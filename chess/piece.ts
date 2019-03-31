@@ -21,7 +21,7 @@ export class Piece {
   move() {}
 
   getValidMoves() {
-    const { pos, posDeltas };
+    const { pos, posDeltas } = this;
     this.resetValidMoves();
     for (let posDelta of this.posDeltas) {
       const rowDelta = this.findAllMoves;
