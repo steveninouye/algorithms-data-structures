@@ -23,16 +23,22 @@ export class Piece {
   getValidMoves() {
     const { pos, posDeltas } = this;
     this.resetValidMoves();
-    for (let posDelta of this.posDeltas) {
-      const rowDelta = this.findAllMoves;
+    for (let posDelta of posDeltas) {
+      const { rowDelta, colDelta } = posDelta;
+      const nextRow = pos.row + rowDelta;
+      const nextCol = pos.col + colDelta;
+      this.findAllMoves(nextRow, nextCol, posDelta);
     }
-    this.findAllMoves();
     this.filterMoves();
     return this.validMoves;
   }
 
-  findAllMoves(pos: Pos, posDelta: PosDelta, maxMoves = this.maxMoves): void {
-    const { row, col } = pos;
+  findAllMoves(
+    row: number,
+    col: number,
+    posDelta: PosDelta,
+    maxMoves = this.maxMoves
+  ): void {
     if (
       this.board[row][col].instanceOf(Piece) ||
       [row, col].some((el) => el < 0 || el > 8)
