@@ -39,11 +39,7 @@ export class Piece {
     posDelta: PosDelta,
     maxMoves = this.maxMoves
   ): void {
-    if (
-      this.board[row][col].instanceOf(Piece) ||
-      [row, col].some((el) => el < 0 || el > 8)
-    )
-      return;
+    if (this.isInvalidMove(row, col)) return;
     const { rowDelta, colDelta } = posDelta;
   }
 
@@ -51,5 +47,12 @@ export class Piece {
 
   resetValidMoves() {
     this.validMoves = [];
+  }
+
+  isInvalidMove(row: number, col: number) {
+    return (
+      this.board[row][col].instanceOf(Piece) ||
+      [row, col].some((el) => el < 0 || el > 8)
+    );
   }
 }
