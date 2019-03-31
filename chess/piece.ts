@@ -22,7 +22,7 @@ export class Piece {
     this.validMoves = [];
     this.findAllMoves();
     this.filterMoves();
-    return this.movesAvailable;
+    return this.validMoves;
   }
 
   findAllMoves(pos: Pos, maxMoves = this.maxMoves): void {
@@ -32,7 +32,6 @@ export class Piece {
       [row, col].some((el) => el < 0 || el > 8)
     )
       return;
-    
   }
 
   filterMoves() {}
